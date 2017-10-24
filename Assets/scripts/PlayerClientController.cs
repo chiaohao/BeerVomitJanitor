@@ -5,10 +5,20 @@ using UnityEngine.Networking;
 
 public class PlayerClientController : NetworkBehaviour {
 
-	//controllers
-//	ServerDataController sdc;
+	public float speed;
+	public Camera playerCamera;
 
-//	void Start(){
-//		sdc = GameObject.FindObjectOfType<ServerDataController> ();
-//	}
+	void Start(){
+		GameObject.Find ("MainCamera").GetComponent<AudioListener>().enabled = false;
+		if (isLocalPlayer)
+			playerCamera.gameObject.SetActive (true);
+	}
+
+
+	void Update(){
+		if (isLocalPlayer) {
+			Vector3 move = Vector3.zero;
+			transform.Translate(Vector3.Normalize (Input.GetAxis ("Horizontal") * transform.right + Input.GetAxis ("Vertical") * transform.forward) * speed * Time.deltaTime);
+		}
+	}
 }
