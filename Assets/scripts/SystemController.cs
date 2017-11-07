@@ -18,6 +18,9 @@ public class SystemController : MonoBehaviour {
 	public InputField clientIpText;
 	public InputField clientPortText;
 
+	public GameObject lobbyPlayerList;
+	public GameObject gameStartBtn;
+
 	void Start () {
 		nc = FindObjectOfType<NetworkController> ();
 		gsc = GetComponent<GameStatusController> ();
@@ -37,23 +40,37 @@ public class SystemController : MonoBehaviour {
 		nc.networkAddress = Network.player.ipAddress;
 		nc.networkPort = Convert.ToInt32(hostPortText.text);
 		nc.StartHost ();
-		gsc.switchStatus (GameStatus.Waiting);
+		gsc.switchStatus (GameStatus.Lobby);
 	}
 
 	public void onClientConnectBtnPressed(){
 		nc.networkAddress = clientIpText.text;
 		nc.networkPort = Convert.ToInt32(clientPortText.text);
 		nc.StartClient ();
-		gsc.switchStatus (GameStatus.Waiting);
+		gsc.switchStatus (GameStatus.Lobby);
 	}
 
 	public void onGameStartPressed(){
-		if(sdc == null)
-			sdc = FindObjectOfType<ServerDataController> ();
-		sdc.RpcGameStart ();
+		if (nc.numPlayers <= 1)
+			return;
+		LobbyPlayerClientController[] lpccs = FindObjectsOfType<LobbyPlayerClientController> ();
+		LobbyPlayerClientController lpcc_local = null;
+		foreach (LobbyPlayerClientController lpcc in lpccs) {
+			if (lpcc.isLocalPlayer)
+				lpcc_local = lpcc;
+			else if (!lpcc.isReady)
+				return;
+		}
+		lpcc_local.SendReadyToBeginMessage ();
 	}
 
 	public void onBackToTitlePressed(){
 		gsc.switchStatus (GameStatus.MainMenu);
+	}
+
+	public void setupLobbyPlayer(GameObject lobbyPlayer, bool isServer){
+		lobbyPlayer.transform.SetParent (lobbyPlayerList.transform);
+		if (!isServer)
+			gameStartBtn.SetActive(false);
 	}
 }

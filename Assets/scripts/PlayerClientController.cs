@@ -9,7 +9,6 @@ public class PlayerClientController : NetworkBehaviour {
 	public Camera playerCamera;
 
 	void Start(){
-		GameObject.Find ("MainCamera").GetComponent<AudioListener>().enabled = false;
 		if (isLocalPlayer)
 			playerCamera.gameObject.SetActive (true);
 	}

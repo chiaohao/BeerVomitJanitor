@@ -6,7 +6,7 @@ public enum GameStatus{
 	MainMenu,
 	HostCreating,
 	ClientConnecting,
-	Waiting,
+	Lobby,
 	CharacterChoose,
 	Playing,
 	GameOver, 
@@ -18,7 +18,7 @@ public class GameStatusController : MonoBehaviour {
 	public GameObject MainPanel;
 	public GameObject ServerPanel;
 	public GameObject ClientPanel;
-	public GameObject WaitingPanel;
+	public GameObject LobbyPanel;
 	public GameObject ErrorPanel;
 
 	[HideInInspector]
@@ -34,7 +34,7 @@ public class GameStatusController : MonoBehaviour {
 			MainPanel.SetActive (true);
 			ServerPanel.SetActive (false);
 			ClientPanel.SetActive (false);
-			WaitingPanel.SetActive (false);
+			LobbyPanel.SetActive (false);
 			ErrorPanel.SetActive (false);
 			break;
 		case GameStatus.HostCreating:
@@ -45,20 +45,18 @@ public class GameStatusController : MonoBehaviour {
 			MainPanel.SetActive (false);
 			ClientPanel.SetActive (true);
 			break;
-		case GameStatus.Waiting:
-			WaitingPanel.SetActive (true);
+		case GameStatus.Lobby:
+			LobbyPanel.SetActive (true);
 			ServerPanel.SetActive (false);
 			ClientPanel.SetActive (false);
 			break;
-		case GameStatus.CharacterChoose:
-			WaitingPanel.SetActive (false);
-			break;
 		case GameStatus.Playing:
+			LobbyPanel.SetActive (false);
 			break;
 		case GameStatus.GameOver:
 			break;
 		case GameStatus.Error:
-			WaitingPanel.SetActive (false);
+			LobbyPanel.SetActive (false);
 			ErrorPanel.SetActive (true);
 			break;
 		default:

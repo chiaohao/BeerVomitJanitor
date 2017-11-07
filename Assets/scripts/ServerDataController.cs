@@ -15,7 +15,6 @@ public class ServerDataController : NetworkBehaviour {
 	[SyncVar(hook = "UpdatePlayerNumText")]
 	[HideInInspector]
 	public int playerNum = 0; //syncval example
-	public Text playerNumText;
 
 	[SyncVar]
 	public float gameTime;
@@ -30,12 +29,6 @@ public class ServerDataController : NetworkBehaviour {
 		//playerNumText.text = "Now Players: " + pn.ToString ();
 	}
 
-	[ClientRpc]
-	public void RpcGameStart(){
-		gsc.switchStatus (GameStatus.CharacterChoose);
-	}
-
 	void Update(){
-		playerNumText.text = "Now Players: " + nc.numPlayers.ToString ();
 	}
 }
