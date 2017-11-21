@@ -220,6 +220,8 @@ MonoBehaviour:
   lobbySlots: []
   sdc: {fileID: 1651697251}
   gsc: {fileID: 2144993697}
+  VomitPrefab: {fileID: 1956948144759886, guid: 285ab5aac901b6142b6b6101884f2009,
+    type: 2}
 --- !u!4 &695390
 Transform:
   m_ObjectHideFlags: 0

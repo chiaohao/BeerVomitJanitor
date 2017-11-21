@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 public class PlayerClientController : NetworkBehaviour {
 
-	NetworkLobbyManager nlm;
+	//ServerDataController sdc;
+	NetworkController nc;
 
 	//movement
 	public float speed;
@@ -23,7 +24,8 @@ public class PlayerClientController : NetworkBehaviour {
 	bool isTrace;
 
 	void Start(){
-		nlm = FindObjectOfType<NetworkLobbyManager> ();
+		//sdc = FindObjectOfType<ServerDataController> ();
+		nc = FindObjectOfType<NetworkController> ();
 		Cursor.lockState = CursorLockMode.Locked;
 		if (isLocalPlayer) {
 			playerCamera.gameObject.SetActive (true);
@@ -77,7 +79,9 @@ public class PlayerClientController : NetworkBehaviour {
 				if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit){
 					Vector3 hitPos = hit.point;
 					Vector3 hitNorm = hit.normal;
-					// do server spawn
+					//register vomit prefab
+					ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
+					CmdSpawnVomit (hitPos, hitNorm);
 					animator.SetBool ("vomit", true);
 					lockVomit = true;
 					lockJump = true;
@@ -92,5 +96,17 @@ public class PlayerClientController : NetworkBehaviour {
 		lockJump = false;
 		lockVomit = false;
 		//print ("unlock");
+	}
+
+	[Command]
+	public void CmdSpawnVomit(Vector3 position, Vector3 normal){
+		SpawnVomit (position, normal);
+	}
+
+	[Server]
+	void SpawnVomit(Vector3 position, Vector3 normal){
+		Transform vomit = Instantiate (nc.spawnPrefabs [0], position, new Quaternion (0, 0, 0, 0)).transform;
+		vomit.forward = normal.normalized;
+		NetworkServer.Spawn (vomit.gameObject);
 	}
 }

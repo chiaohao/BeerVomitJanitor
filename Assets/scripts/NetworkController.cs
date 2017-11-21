@@ -19,7 +19,7 @@ public class NetworkController : NetworkLobbyManager {
 		base.OnLobbyServerDisconnect (conn);
 		sdc.playerNum -= 1;
 	}
-
+		
 	public override void OnClientDisconnect (NetworkConnection conn)
 	{
 		base.OnClientDisconnect (conn);
