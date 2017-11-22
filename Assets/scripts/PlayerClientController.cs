@@ -16,6 +16,7 @@ public class PlayerClientController : NetworkBehaviour {
 
 	bool lockJump;
 	bool lockVomit;
+	bool lockWalk;
 
 	//raycast
 	Ray ray;
@@ -35,8 +36,10 @@ public class PlayerClientController : NetworkBehaviour {
 			transform.position = new Vector3 (-26.54303f, 0f, 15.64f);
 		}
 		animator = GetComponentInChildren<Animator> ();
+		animator.SetBool ("drunk", true);
 		lockJump = false;
 		lockVomit = false;
+		lockWalk = false;
 
 		isTrace = true;
 	}
@@ -47,25 +50,26 @@ public class PlayerClientController : NetworkBehaviour {
 			//movement
 			animator.SetBool ("jump", false);
 			animator.SetBool ("vomit", false);
+			if (!lockWalk) {
+				Vector3 move = Vector3.Normalize (Input.GetAxis ("Horizontal") * transform.right + Input.GetAxis ("Vertical") * transform.forward) * speed * Time.deltaTime;
+				transform.Translate (move, Space.World);
+				animator.SetFloat ("speed", (Vector3.Dot(transform.forward, move) >= 0 ? 1 : -1) * move.magnitude / Time.deltaTime);
 
-			Vector3 move = Vector3.Normalize (Input.GetAxis ("Horizontal") * transform.right + Input.GetAxis ("Vertical") * transform.forward) * speed * Time.deltaTime;
-			transform.Translate(move, Space.World);
-			animator.SetFloat ("speed", move.magnitude / Time.deltaTime);
-
-			Vector3 rx = Vector3.up * Input.GetAxis("Mouse X") * rotationSpeed;
-			transform.Rotate (rx);
-			float ry = Input.GetAxis("Mouse Y");
-			if (ry != 0) {
-				if (Mathf.Round(playerCamera.transform.rotation.eulerAngles.x) <= 90 && playerCamera.transform.rotation.eulerAngles.x + Vector3.left.x * ry * rotationSpeed > 90)
-					playerCamera.transform.rotation = Quaternion.Euler(new Vector3(90, playerCamera.transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z));
-				else if (Mathf.Round(playerCamera.transform.rotation.eulerAngles.x) >= 270 && playerCamera.transform.rotation.eulerAngles.x + Vector3.left.x * ry * rotationSpeed < 270)
-					playerCamera.transform.rotation = Quaternion.Euler(new Vector3(270, playerCamera.transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z));
-				else
-					playerCamera.transform.Rotate(Vector3.left * ry * rotationSpeed);
+				Vector3 rx = Vector3.up * Input.GetAxis ("Mouse X") * rotationSpeed;
+				transform.Rotate (rx);
+				float ry = Input.GetAxis ("Mouse Y");
+				if (ry != 0) {
+					if (Mathf.Round (playerCamera.transform.rotation.eulerAngles.x) <= 90 && playerCamera.transform.rotation.eulerAngles.x + Vector3.left.x * ry * rotationSpeed > 90)
+						playerCamera.transform.rotation = Quaternion.Euler (new Vector3 (90, playerCamera.transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z));
+					else if (Mathf.Round (playerCamera.transform.rotation.eulerAngles.x) >= 270 && playerCamera.transform.rotation.eulerAngles.x + Vector3.left.x * ry * rotationSpeed < 270)
+						playerCamera.transform.rotation = Quaternion.Euler (new Vector3 (270, playerCamera.transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z));
+					else
+						playerCamera.transform.Rotate (Vector3.left * ry * rotationSpeed);
+				}
 			}
 
 			if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
-				GetComponent<Rigidbody> ().AddForce (Vector3.up * 70, ForceMode.Force);
+				GetComponent<Rigidbody> ().AddForce (Vector3.up * 6, ForceMode.Impulse);
 				animator.SetBool ("jump", true);
 				lockJump = true;
 				lockVomit = true;
@@ -85,6 +89,7 @@ public class PlayerClientController : NetworkBehaviour {
 					animator.SetBool ("vomit", true);
 					lockVomit = true;
 					lockJump = true;
+					lockWalk = true;
 					StartCoroutine (unlockAction (5f));
 				}
 			}
@@ -95,6 +100,7 @@ public class PlayerClientController : NetworkBehaviour {
 		yield return new WaitForSeconds(seconds);
 		lockJump = false;
 		lockVomit = false;
+		lockWalk = false;
 		//print ("unlock");
 	}
 
