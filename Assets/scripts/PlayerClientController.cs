@@ -13,6 +13,8 @@ public class PlayerClientController : NetworkBehaviour {
 	public float rotationSpeed;
 	public Camera playerCamera;
 	Animator animator;
+	public Avatar Drunker;
+	public Avatar Cleaner;
 
 	bool lockJump;
 	bool lockVomit;
@@ -36,7 +38,9 @@ public class PlayerClientController : NetworkBehaviour {
 			transform.position = new Vector3 (-26.54303f, 0f, 15.64f);
 		}
 		animator = GetComponentInChildren<Animator> ();
-		animator.SetBool ("drunk", true);
+		animator.avatar = Cleaner;
+		animator.SetBool ("Drunker", false);
+
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
@@ -73,7 +77,7 @@ public class PlayerClientController : NetworkBehaviour {
 				animator.SetBool ("jump", true);
 				lockJump = true;
 				lockVomit = true;
-				StartCoroutine (unlockAction (2f));
+				StartCoroutine (unlockAction (145f / 60f));
 			}
 
 			//raycast
@@ -90,7 +94,7 @@ public class PlayerClientController : NetworkBehaviour {
 					lockVomit = true;
 					lockJump = true;
 					lockWalk = true;
-					StartCoroutine (unlockAction (5f));
+					StartCoroutine (unlockAction (317f / 60f));
 				}
 			}
 		}
