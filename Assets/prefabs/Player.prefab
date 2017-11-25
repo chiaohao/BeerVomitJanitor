@@ -552,7 +552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1202187624102104
 GameObject:
   m_ObjectHideFlags: 1
@@ -727,7 +727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1265977836228060
 GameObject:
   m_ObjectHideFlags: 1
@@ -917,6 +917,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4159702836107404}
+  - component: {fileID: 65534216598458806}
   m_Layer: 0
   m_Name: mixamorig:RightToeBase
   m_TagString: Untagged
@@ -2298,6 +2299,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4215344721109688}
+  - component: {fileID: 65951692114750762}
   m_Layer: 0
   m_Name: mixamorig:LeftToeBase
   m_TagString: Untagged
@@ -4494,6 +4496,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0873971, y: 1.0002353, z: 2.5566897}
   m_Center: {x: -0.11165237, y: 0.5627952, z: -0.32103077}
+--- !u!65 &65534216598458806
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1353235920264598}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.7138589, z: 2.9201407}
+  m_Center: {x: 0.00000059452447, y: 0.31030527, z: -0.2800584}
 --- !u!65 &65795612763881098
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4506,6 +4520,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000001, z: 6.302292}
   m_Center: {x: 0, y: -0.000000066826125, z: 2.6511426}
+--- !u!65 &65951692114750762
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1995334300523046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.8115033, z: 3.0708146}
+  m_Center: {x: 0.0000000071724924, y: 0.33814782, z: -0.37552905}
 --- !u!81 &81073186592297636
 AudioListener:
   m_ObjectHideFlags: 1
@@ -4638,10 +4664,8 @@ MonoBehaviour:
   playerCamera: {fileID: 20857861467560204}
   Drunker: {fileID: 9000000, guid: 9cce769310c84114da68f651a869fb64, type: 3}
   Cleaner: {fileID: 9000000, guid: 7209c293914629e4fba7171cc6a88426, type: 3}
-  DrunkerAnimatorController: {fileID: 9100000, guid: 0c1629488160bd94e9f3ecc7d285f818,
-    type: 2}
-  CleanerAnimatorController: {fileID: 9100000, guid: a6399e55ef4212b44a77ce1a46321a5e,
-    type: 2}
+  DrunkerObject: {fileID: 1261413921809504}
+  CleanerObject: {fileID: 1199343286992630}
 --- !u!114 &114604805930357062
 MonoBehaviour:
   m_ObjectHideFlags: 1

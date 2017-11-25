@@ -11,6 +11,16 @@ public class ServerDataController : NetworkBehaviour {
 	GameStatusController gsc;
 	NetworkController nc;
 
+	//SyncLists
+	public struct PlayerAttribute
+	{
+		public int NetworkId;
+		public int CharacterId;
+	}
+
+	public class Players : SyncListStruct<PlayerAttribute>{};
+	public Players players = new Players ();
+
 	//SyncVars
 	[SyncVar(hook = "UpdatePlayerNumText")]
 	[HideInInspector]
@@ -29,6 +39,15 @@ public class ServerDataController : NetworkBehaviour {
 		//playerNumText.text = "Now Players: " + pn.ToString ();
 	}
 
+	public void AddPlayer(int Nid, int Cid){
+		PlayerAttribute p = new PlayerAttribute ();
+		p.NetworkId = Nid;
+		p.CharacterId = Cid;
+		players.Add (p);
+	}
+
 	void Update(){
+		//Debug.Log (players.Count);
+		//Debug.Log (players[0].NetworkId.ToString() + " " + players[0].CharacterId.ToString());
 	}
 }

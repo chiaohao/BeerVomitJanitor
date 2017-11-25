@@ -7,6 +7,7 @@ public class PlayerClientController : NetworkBehaviour {
 
 	//ServerDataController sdc;
 	NetworkController nc;
+	ServerDataController sdc;
 
 	//movement
 	public float speed;
@@ -15,45 +16,73 @@ public class PlayerClientController : NetworkBehaviour {
 	Animator animator;
 	public Avatar Drunker;
 	public Avatar Cleaner;
+	public GameObject DrunkerObject;
+	public GameObject CleanerObject;
 
 	bool lockJump;
 	bool lockVomit;
 	bool lockWalk;
+	bool lockClean;
+
+	[SyncVar]
+	int characterId;
 
 	//raycast
 	Ray ray;
-	float rayLength = 10f;
+	float rayLength = 15f;
 	RaycastHit hit;
 	bool isTrace;
 
 	void Start(){
-		//sdc = FindObjectOfType<ServerDataController> ();
+		sdc = FindObjectOfType<ServerDataController> ();
 		nc = FindObjectOfType<NetworkController> ();
+		animator = GetComponentInChildren<Animator> ();
 		Cursor.lockState = CursorLockMode.Locked;
+
 		if (isLocalPlayer) {
 			playerCamera.gameObject.SetActive (true);
 			transform.position = new Vector3 (-26.54303f, 0f, 14.64f);
+			foreach (ServerDataController.PlayerAttribute p in sdc.players) {
+				if (p.NetworkId == connectionToServer.connectionId)
+					characterId = p.CharacterId;
+			}
 		} 
 		else {
 			transform.position = new Vector3 (-26.54303f, 0f, 15.64f);
 		}
-		animator = GetComponentInChildren<Animator> ();
-		animator.avatar = Cleaner;
-		animator.SetBool ("Drunker", false);
+
 
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
+		lockClean = false;
 
 		isTrace = true;
 	}
 
 
 	void Update(){
+		if (characterId == 1) {
+			animator.SetBool ("Drunker", false);
+			animator.SetBool ("Cleaner", true);
+			DrunkerObject.SetActive (false);
+			CleanerObject.SetActive (true);
+			animator.avatar = Cleaner;
+		} 
+		else if (characterId == 0) {
+			animator.SetBool ("Drunker", true);
+			animator.SetBool ("Cleaner", false);
+			DrunkerObject.SetActive (true);
+			CleanerObject.SetActive (false);
+			animator.avatar = Drunker;
+		}
+
 		if (isLocalPlayer) {
+			//Debug.Log (connectionToServer.connectionId);
 			//movement
 			animator.SetBool ("jump", false);
 			animator.SetBool ("vomit", false);
+			animator.SetBool ("clean", false);
 			if (!lockWalk) {
 				Vector3 move = Vector3.Normalize (Input.GetAxis ("Horizontal") * transform.right + Input.GetAxis ("Vertical") * transform.forward) * speed * Time.deltaTime;
 				transform.Translate (move, Space.World);
@@ -73,28 +102,38 @@ public class PlayerClientController : NetworkBehaviour {
 			}
 
 			if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
-				GetComponent<Rigidbody> ().AddForce (Vector3.up * 15, ForceMode.Impulse);
+				GetComponent<Rigidbody> ().AddForce (Vector3.up * 10, ForceMode.Impulse);
 				animator.SetBool ("jump", true);
 				lockJump = true;
 				lockVomit = true;
-				StartCoroutine (unlockAction (145f / 60f));
+				StartCoroutine (unlockAction (79f / 60f));
 			}
 
 			//raycast
 			ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 			if (Physics.Raycast (ray, out hit, rayLength)) {
 				//Debug.Log (hit.transform.name);
-				if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit){
-					Vector3 hitPos = hit.point;
-					Vector3 hitNorm = hit.normal;
-					//register vomit prefab
-					ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
-					CmdSpawnVomit (hitPos, hitNorm);
-					animator.SetBool ("vomit", true);
-					lockVomit = true;
-					lockJump = true;
-					lockWalk = true;
-					StartCoroutine (unlockAction (317f / 60f));
+				if (animator.GetBool ("Drunker")) {
+					if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
+						Vector3 hitPos = hit.point;
+						Vector3 hitNorm = hit.normal;
+						//register vomit prefab
+						ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
+						CmdSpawnVomit (hitPos, hitNorm);
+						animator.SetBool ("vomit", true);
+						lockVomit = true;
+						lockJump = true;
+						lockWalk = true;
+						StartCoroutine (unlockAction (317f / 60f));
+					}
+				} 
+				else if (animator.GetBool ("Cleaner")) {
+					if (Input.GetAxisRaw ("Fire1") != 0f && !lockClean) {
+						animator.SetBool ("clean", true);
+						lockJump = true;
+						lockWalk = true;
+						StartCoroutine (unlockAction (3f * 78f / 60f));
+					};
 				}
 			}
 		}
@@ -105,6 +144,7 @@ public class PlayerClientController : NetworkBehaviour {
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
+		lockClean = false;
 		//print ("unlock");
 	}
 

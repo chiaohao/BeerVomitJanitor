@@ -8,16 +8,15 @@ public class NetworkController : NetworkLobbyManager {
 	public ServerDataController sdc;
 	public GameStatusController gsc;
 
-	public override void OnServerAddPlayer (NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
-	{
-		base.OnServerAddPlayer (conn, playerControllerId, extraMessageReader);
-		sdc.playerNum += 1;
-	}
-
 	public override void OnLobbyServerDisconnect (NetworkConnection conn)
 	{
 		base.OnLobbyServerDisconnect (conn);
-		sdc.playerNum -= 1;
+	}
+
+	public override void OnLobbyServerConnect (NetworkConnection conn)
+	{
+		base.OnLobbyServerConnect (conn);
+		sdc.AddPlayer (conn.connectionId, sdc.players.Count == 0 ? 1 : 0);
 	}
 		
 	public override void OnClientDisconnect (NetworkConnection conn)
