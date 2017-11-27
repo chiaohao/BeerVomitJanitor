@@ -1,0 +1,1055 @@
+# 
+# ?? Sweet Home 3D ?? - ??? ??? 27 21:07:48 TST 2017
+# http://www.sweethome3d.com/
+# 
+
+newmtl __Wood_Veneer_01_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor___Wood_Veneer_01_.png
+
+newmtl material
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.6431373 0.6980392 0.7333333
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color895227255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color000255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl book_case_base_3
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_book_case_base_3.png
+
+newmtl old_books
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_old_books.png
+
+newmtl edge_color1066942255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl old_books_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_old_books_1.png
+
+newmtl edge_color824026255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl old_books_2
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_old_books_2.png
+
+newmtl book_case_base
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_book_case_base.png
+
+newmtl material_0
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl darkwood
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_darkwood.jpeg
+
+newmtl glass
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.5 0.5 0.5
+Ks 0.024 0.024 0.024
+Ns 103.0
+d 0.5
+
+newmtl frostedglass
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.5 0.5 0.5
+Ks 0.0 0.0 0.0
+Ns 1.0
+d 0.5
+
+newmtl material_2
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_2.png
+
+newmtl edge_color614326255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_4
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.7568627 0.6745098 0.2117647
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color19317254255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_3
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.1529412 0.2 0.1254902
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_5
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.7686275 0.6431373 0.3137255
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color19616480255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl books
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_books.png
+
+newmtl __Concrete_Scored_Jointless_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor___Concrete_Scored_Jointless_.png
+
+newmtl Gruppo_libri7
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Gruppo_libri7.png
+
+newmtl Libri6_copertina
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Libri6_copertina.png
+
+newmtl edge_color15611857255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color1708955255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl pagine_libri
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_pagine_libri.png
+
+newmtl Libri6_copertina_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Libri6_copertina.png
+
+newmtl __0137_Black_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl books_2
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_books.png
+
+newmtl edge_color1238756255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl wood_3_by_charadetextures
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_wood_3_by_charadetextures.png
+
+newmtl edge_color977351255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl wood_3_by_charadetextures_3
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_wood_3_by_charadetextures.png
+
+newmtl __Color_000_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __Color_007_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.227451 0.227451 0.227451
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color585858255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __Translucent_Glass_Blue_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.5607843 0.7176471 0.9372549
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+d 0.45098042
+
+newmtl edge_color143183239255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __Color_A21_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.1176471 0.03921569 0.03921569
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl books_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_books_1.png
+
+newmtl material_11
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11.png
+
+newmtl material_11_4
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11.png
+
+newmtl edge_color1289277255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl pagine_libri_5
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_pagine_libri_5.png
+
+newmtl material_11_6
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11_6.png
+
+newmtl __0018_Brown_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.3294118 0.08235294 0.08235294
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __0057_DarkKhaki_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.2392157 0.2313725 0.1333333
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __0022_Maroon_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.227451 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_11_7
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11_7.png
+
+newmtl material_11_8
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11_8.png
+
+newmtl __Color_002_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor___Color_002_.png
+
+newmtl material_2_4758
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.6941176 0.7176471 0.745098
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl _78361_COPY
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__78361_COPY.png
+
+newmtl __Color_B21_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.172549 0.1098039 0.08627451
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_8
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.1176471 0.07058824 0.04705882
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Wood_Cherry_Original
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Wood_Cherry_Original.png
+
+newmtl edge_color20116255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Wood_Cherry_Original_0
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Wood_Cherry_Original.png
+
+newmtl material_5_8_4822
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.8588235 0.7803922 0.4352941
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color219199111255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_4_398_5212
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.1882353 0.1882353 0.1882353
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.3490196 0.2235294 0.08627451
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color795018255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color848484255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __Brown_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.3098039 0.1960784 0.07058824
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __Gray6_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.3294118 0.3294118 0.3294118
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_2_418_5232
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.3294118 0.3294118 0.3294118
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+d 0.4901961
+
+newmtl material_6
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+d 0.5411765
+
+newmtl edge_color895722255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl __Black_
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.4862745 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_7
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.8980392 0.7960784 0.3843137
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color12400255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_550_5364
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.6705882 0.6901961 0.8
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Canvas
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Canvas.jpeg
+
+newmtl Frame
+illum 3
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 1.0 1.0 1.0
+Ns 128.0
+map_Kd [171110]_FirstFloor_Frame.jpeg
+
+newmtl Frame_back
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.56 0.44 0.31
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Back
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.56 0.44 0.31
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Color_C02
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 0.6 0.1960784
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Color_B20
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.4 0.3372549 0.3176471
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Color_M06
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.3372549 0.3372549 0.3372549
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Color_M00
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_17
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11.png
+
+newmtl material_17_0
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11.png
+
+newmtl pagine_libri_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_pagine_libri_5.png
+
+newmtl material_17_2
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11_6.png
+
+newmtl _0057_DarkKhaki
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.2392157 0.2313725 0.1333333
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_17_3
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11_7.png
+
+newmtl material_17_4
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_material_11_8.png
+
+newmtl Gray8
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.1294118 0.1294118 0.1294118
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl 75
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_75.png
+
+newmtl Color_B08
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.2588235 0.0627451 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl material_269_6976
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl negro
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.2 0.2 0.2
+Ks 0.2874656 0.2874656 0.2874656
+Ns 80.0
+
+newmtl negrorefle
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.00008 0.00008 0.00008
+Ks 0.7523468 0.7523468 0.7523468
+Ns 125.0
+
+newmtl blancoeti
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.5162156 0.5161639 0.5161639
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl grisplas
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.3918579 0.3918187 0.3918187
+Ks 0.3799412 0.3799412 0.3799412
+Ns 50.0
+
+newmtl keys
+illum 2
+Ka 0.0 0.0 0.0
+Kd 1.0 1.0 1.0
+Ks 0.2874656 0.2874656 0.2874656
+Ns 80.0
+
+newmtl plastico_negro
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.2 0.2 0.2
+Ks 0.251958 0.251958 0.251958
+Ns 84.31373
+Ni 1.0
+
+newmtl metal
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.074487 0.074487 0.074487
+Ks 1.203062 1.203062 1.203062
+Ns 128.0
+Ni 1.0
+
+newmtl llapis
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.091873 0.155332 0.270299
+Ks 0.914901 0.914901 0.914901
+Ns 94.117645
+Ni 1.0
+
+newmtl fusta
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.8 0.656277 0.249539
+Ks 0.079397 0.075841 0.047304
+Ns 50.980392
+Ni 1.0
+
+newmtl grafit
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.151954 0.151954 0.151954
+Ks 0.055463 0.055463 0.055463
+Ns 66.666664
+Ni 1.0
+
+newmtl boli
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.138595 0.138595 0.138595
+Ks 0.322185 0.322185 0.322185
+Ns 1.0
+Ni 1.0
+d 0.300053
+
+newmtl tap
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.171991 0.171991 0.171991
+Ks 0.5 0.5 0.5
+Ns 96.07843
+Ni 1.0
+
+newmtl point
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.552704 0.52849 0.153944
+Ks 1.952155 1.952155 1.952155
+Ns 128.0
+Ni 1.0
+
+newmtl tinte
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.118907 0.142155 0.232104
+Ks 0.174006 0.174006 0.174006
+Ns 66.666664
+Ni 1.0
+
+newmtl plastic
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.686288 0.686288 0.686288
+Ks 0.174006 0.174006 0.174006
+Ns 66.666664
+Ni 1.0
+d 0.437401
+
+newmtl tapa
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.213275 0.23909 0.338971
+Ks 1.300167 1.300167 1.300167
+Ns 128.0
+Ni 1.0
+
+newmtl simplepen_Tube_12
+illum 2
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.114734 0.114734 0.114734
+Ns 88.23529
+Ni 1.0
+map_Kd [171110]_FirstFloor_simplepen_Tube_12.jpeg
+
+newmtl simplepen_Tube72_13
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.174225 0.2637 0.4258
+Ks 0.114734 0.114734 0.114734
+Ns 88.23529
+Ni 1.0
+
+newmtl transparent
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.434093 0.55638 0.666483
+Ks 0.5 0.5 0.5
+Ns 96.07843
+Ni 1.0
+d 0.7
+
+newmtl reddiamonds_0
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_reddiamonds_0.png
+
+newmtl material_1_4_7316
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.6705882 0.6901961 0.8
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl 23
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_23.png
+
+newmtl reddiamonds
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_reddiamonds_0.png
+
+newmtl __MidnightBlue_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.04313725 0.04313725 0.2078431
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl edge_color111153255
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Material1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_Material1.png
+
+newmtl _139138_2
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_2.png
+
+newmtl _139138_3
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_3.png
+
+newmtl _139138_4
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_4.png
+
+newmtl _139138_5
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_5.png
+
+newmtl _139138_6
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_6.png
+
+newmtl _139138_7
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_7.png
+
+newmtl _139138_8
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_8.png
+
+newmtl _139138_9
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_9.png
+
+newmtl _139138
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138.png
+
+newmtl _139138_0
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_0.png
+
+newmtl _139138_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor__139138_1.png
+
+newmtl room_1_7726
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+map_Kd [171110]_FirstFloor_room_1_7726.jpeg
+
+newmtl room_1_7727
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+
+newmtl wall_2_7729
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+map_Kd [171110]_FirstFloor_wall_2_7729.jpeg
+
+newmtl wall_2_7730
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+map_Kd [171110]_FirstFloor_wall_2_7730.jpeg
+
+newmtl wall_4_7743
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+map_Kd [171110]_FirstFloor_wall_4_7743.jpeg

@@ -1,0 +1,415 @@
+# 
+# ?? Sweet Home 3D ?? - ??? ??? 27 20:54:57 TST 2017
+# http://www.sweethome3d.com/
+# 
+
+newmtl Black
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.08 0.08 0.08
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Gray
+illum 1
+Ka 0.0 0.0 0.0
+Kd 0.48 0.48 0.48
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Red
+illum 1
+Ka 0.0 0.0 0.0
+Kd 1.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl bracket_Mesh_12
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.7 0.7 0.7
+Ks 0.7 0.7 0.7
+Ns 96.07843
+Ni 1.0
+
+newmtl toilet_paper
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.95 0.92 0.92
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+
+newmtl cardboard
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.7 0.7 0.7
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+
+newmtl fayence
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.95 0.95 0.95
+Ks 0.5 0.5 0.5
+Ns 50.0
+Ni 1.0
+
+newmtl chrome
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.7 0.7 0.7
+Ks 0.9 0.9 0.9
+Ns 120.0
+Ni 1.0
+
+newmtl cover
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.95 0.95 0.95
+Ks 0.1 0.1 0.1
+Ns 10.0
+Ni 1.0
+
+newmtl white
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.95 0.95 0.95
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+
+newmtl mirror
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.7 0.7 0.7
+Ks 0.5 0.5 0.5
+Ns 96.07843
+Ni 1.0
+
+newmtl wine_wood
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.316863 0.103529 0.103529
+Ks 0.119802 0.119802 0.119802
+Ns 29.411764
+Ni 1.0
+
+newmtl metal
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.198422 0.198422 0.198422
+Ks 1.288196 1.288196 1.288196
+Ns 128.0
+Ni 1.0
+
+newmtl black_plastic
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.067562 0.067562 0.067562
+Ks 0.809306 0.809306 0.809306
+Ns 50.980392
+Ni 1.0
+
+newmtl alum
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.484047 0.484047 0.484047
+Ks 0.5 0.5 0.5
+Ns 80.39216
+Ni 1.0
+
+newmtl white_travs
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.8 0.8 0.8
+Ks 0.5 0.5 0.5
+Ns 96.07843
+Ni 1.0
+
+newmtl marble_marble_public_dom_cla
+illum 2
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 1.036058 1.036058 1.036058
+Ns 128.0
+Ni 1.0
+map_Kd [171110]_FirstFloor_marble_marble_public_dom_cla.jpeg
+
+newmtl sink_mat_white
+illum 2
+Ka 0.0 0.0 0.0
+Kd 1.0 1.0 1.0
+Ks 1.036058 1.036058 1.036058
+Ns 128.0
+Ni 1.0
+
+newmtl metal_cover
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.288283 0.288283 0.288283
+Ks 1.472026 1.472026 1.472026
+Ns 128.0
+Ni 3.0
+
+newmtl metal_faucet
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.288283 0.288283 0.288283
+Ks 1.472026 1.472026 1.472026
+Ns 128.0
+Ni 3.0
+
+newmtl 1_1
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+map_Kd [171110]_FirstFloor_1_1.jpeg
+
+newmtl toalla
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.28452 0.383924 0.882993
+Ks 0.184654 0.245623 0.311719
+Ns 5.882353
+Ni 1.0
+
+newmtl shower_handle
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.64 0.64 0.64
+Ks 0.5 0.5 0.5
+Ns 96.07843
+Ni 1.0
+
+newmtl towel_1
+illum 2
+Ka 0.0 0.0 0.0
+Kd 0.27 0.33 0.45
+Ks 0.1 0.1 0.1
+Ns 10.0
+Ni 1.0
+
+newmtl metal_2_2_12_60
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.7529412 0.7529412 0.7529412
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Lid
+illum 3
+Ka 0.2 0.2 0.2
+Kd 0.6 0.6392157 0.6666667
+Ks 1.0 1.0 1.0
+Ns 128.0
+
+newmtl Drain
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.14117648 0.18431373 0.25882354
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl blue
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.0 0.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl glass
+illum 2
+Ka 0.78431374 0.99607843 1.0
+Kd 0.78431374 0.99607843 1.0
+Ks 0.6015625 0.6015625 0.6015625
+Ns 77.0
+Ni 1.0
+d 0.19999999
+
+newmtl frame
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.81960785 0.8039216 0.8039216
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl red
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl silver
+illum 2
+Ka 0.9551 0.9551 0.9551
+Kd 0.6163 0.6163 0.6163
+Ks 0.3 0.3 0.3
+Ns 60.0
+
+newmtl white_PanneauCommande_78
+illum 2
+Ka 0.4 0.4 0.4
+Kd 1.0 1.0 1.0
+Ks 0.3 0.3 0.3
+Ns 60.0
+
+newmtl flwhite1
+illum 1
+Ka 0.9306 0.9306 0.9306
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl flltgrey
+illum 1
+Ka 0.5224 0.5224 0.5224
+Kd 0.8245 0.8245 0.8245
+Ks 0.0 0.0 0.0
+Ns 1.0
+d 0.5
+
+newmtl rope
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+map_Kd [171110]_FirstFloor_rope.jpeg
+
+newmtl wood
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+map_Kd [171110]_FirstFloor_wood.jpeg
+
+newmtl Cube_91
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+map_Kd [171110]_FirstFloor_Cube_91.jpeg
+
+newmtl 92
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.9 0.9 0.9
+Ks 0.5 0.5 0.5
+Ns 128.0
+Ni 1.0
+
+newmtl frame_door_Cube_94
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.9 0.9 0.9
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+
+newmtl 95
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.9 0.9 0.9
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+
+newmtl handle_Cylinder_96
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.429227 0.429227 0.429227
+Ks 0.5 0.5 0.5
+Ns 128.0
+Ni 1.0
+
+newmtl Cage_in
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.93 0.92 0.9
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Cage_out
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Frame_out
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Frame_in
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.93 0.92 0.9
+Ks 0.0 0.0 0.0
+Ns 1.0
+
+newmtl Lock
+illum 2
+Ka 0.2 0.2 0.2
+Kd 0.85 0.8 0.68
+Ks 1.0 1.0 1.0
+Ns 128.0
+
+newmtl Glass
+illum 1
+Ka 0.2 0.2 0.2
+Kd 0.8245 0.8245 0.8245
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1.0
+d 0.5
+
+newmtl room_1_104
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+map_Kd [171110]_FirstFloor_room_1_104.jpeg
+
+newmtl room_1_105
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+
+newmtl wall_2_106
+illum 1
+Ka 0.9411765 0.9411765 0.9411765
+Kd 0.9411765 0.9411765 0.9411765
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+
+newmtl wall_2_107
+illum 1
+Ka 0.2 0.2 0.2
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+Ns 1.0
+Ni 1
+d 1.0
+map_Kd [171110]_FirstFloor_wall_2_107.jpeg
