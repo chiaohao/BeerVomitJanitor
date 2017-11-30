@@ -22,17 +22,12 @@ public class ServerDataController : NetworkBehaviour {
 	public Players players = new Players ();
 
 	//SyncVars
-	[SyncVar(hook = "UpdatePlayerNumText")]
-	[HideInInspector]
-	public int playerNum = 0; //syncval example
-
 	[SyncVar]
 	public float gameTime;
 
 	void Awake(){
 		gsc = FindObjectOfType<GameStatusController> ();
 		nc = FindObjectOfType<NetworkController> ();
-		UpdatePlayerNumText (playerNum);
 	}
 
 	public void UpdatePlayerNumText(int pn){
@@ -47,7 +42,8 @@ public class ServerDataController : NetworkBehaviour {
 	}
 
 	void Update(){
-		//Debug.Log (players.Count);
-		//Debug.Log (players[0].NetworkId.ToString() + " " + players[0].CharacterId.ToString());
+		gameTime -= Time.deltaTime;
+		if (gameTime < 0f)
+			gameTime = 0f;
 	}
 }

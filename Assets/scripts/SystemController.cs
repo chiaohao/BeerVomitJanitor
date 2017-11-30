@@ -21,10 +21,11 @@ public class SystemController : MonoBehaviour {
 	public GameObject lobbyPlayerList;
 	public GameObject gameStartBtn;
 
+	public float gametime = 5f * 60f;
+
 	void Start () {
 		nc = FindObjectOfType<NetworkController> ();
 		gsc = GetComponent<GameStatusController> ();
-		sdc = FindObjectOfType<ServerDataController> ();
 		hostIpText.text = "IP: " + Network.player.ipAddress;
 	}
 
@@ -53,6 +54,8 @@ public class SystemController : MonoBehaviour {
 	public void onGameStartPressed(){
 		if (nc.numPlayers <= 1)
 			return;
+		sdc = FindObjectOfType<ServerDataController> ();
+		sdc.gameTime = gametime;
 		LobbyPlayerClientController[] lpccs = FindObjectsOfType<LobbyPlayerClientController> ();
 		LobbyPlayerClientController lpcc_local = null;
 		foreach (LobbyPlayerClientController lpcc in lpccs) {
@@ -70,7 +73,6 @@ public class SystemController : MonoBehaviour {
 
 	public void setupLobbyPlayer(GameObject lobbyPlayer, bool isServer){
 		lobbyPlayer.transform.SetParent (lobbyPlayerList.transform);
-		if (!isServer)
-			gameStartBtn.SetActive(false);
+		gameStartBtn.SetActive(isServer ? true : false);
 	}
 }
