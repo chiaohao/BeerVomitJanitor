@@ -5,6 +5,7 @@
 /[Bb]uilds/
 /Assets/AssetStoreTools*
 /test_output/
+/Assets/BigAsset/
 
 # Visual Studio 2015 cache directory
 /.vs/
