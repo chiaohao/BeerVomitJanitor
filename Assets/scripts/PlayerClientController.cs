@@ -48,7 +48,7 @@ public class PlayerClientController : NetworkBehaviour {
 			}
 		} 
 		else {
-			transform.position = new Vector3 (-26.54303f, 0f, 15.64f);
+			transform.position = new Vector3 (-26.54303f, 0f, 18.64f);
 		}
 
 
