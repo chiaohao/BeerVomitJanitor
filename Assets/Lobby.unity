@@ -144,8 +144,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1209278784033012, guid: 329eaf749febc60408f8e0d5d85c625b,
-    type: 2}
+  m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Lobby
@@ -194,7 +193,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 0500000000000000
+  m_Channels: 
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -208,7 +207,7 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   m_ShowLobbyGUI: 0
-  m_MaxPlayers: 2
+  m_MaxPlayers: 4
   m_MaxPlayersPerConnection: 1
   m_MinPlayers: 0
   m_LobbyPlayerPrefab: {fileID: 114910615801474604, guid: 676ca74385825ba49aaccde365ea67ce,
@@ -2821,7 +2820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e7cb4fa1ce09748a62ac1772e52f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
   gameTime: 0
 --- !u!114 &1651697252
 MonoBehaviour:
@@ -3624,6 +3622,7 @@ MonoBehaviour:
   clientPortText: {fileID: 1849209082}
   lobbyPlayerList: {fileID: 308210342}
   gameStartBtn: {fileID: 842493940}
+  gametime: 300
 --- !u!224 &2144993696
 RectTransform:
   m_ObjectHideFlags: 0
