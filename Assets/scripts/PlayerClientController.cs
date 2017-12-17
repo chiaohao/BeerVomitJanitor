@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Obi;
 
 public class PlayerClientController : NetworkBehaviour {
 
@@ -40,15 +41,16 @@ public class PlayerClientController : NetworkBehaviour {
 		Cursor.lockState = CursorLockMode.Locked;
 
 		if (isLocalPlayer) {
-			playerCamera.gameObject.SetActive (true);
-			transform.position = new Vector3 (-26.54303f, 0f, 14.64f);
+			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(0).position;
 			foreach (ServerDataController.PlayerAttribute p in sdc.players) {
 				if (p.NetworkId == connectionToServer.connectionId)
 					characterId = p.CharacterId;
 			}
+			FindObjectOfType<VomitPlacesController> ().SetVomitCameraRenderer ();
 		} 
 		else {
-			transform.position = new Vector3 (-26.54303f, 0f, 18.64f);
+			playerCamera.gameObject.SetActive (false);
+			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
 
 
@@ -117,9 +119,13 @@ public class PlayerClientController : NetworkBehaviour {
 					if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
 						Vector3 hitPos = hit.point;
 						Vector3 hitNorm = hit.normal;
+						/*
 						//register vomit prefab
 						ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
 						CmdSpawnVomit (hitPos, hitNorm);
+						*/
+						CmdVomit (0);
+
 						animator.SetBool ("vomit", true);
 						lockVomit = true;
 						lockJump = true;
@@ -149,6 +155,16 @@ public class PlayerClientController : NetworkBehaviour {
 	}
 
 	[Command]
+	public void CmdVomit(int index){
+		RpcVomit (index);
+	}
+
+	[ClientRpc]
+	public void RpcVomit(int index){
+		FindObjectOfType<VomitPlacesController> ().VomitToIndex (index);
+	}
+	/*
+	[Command]
 	public void CmdSpawnVomit(Vector3 position, Vector3 normal){
 		SpawnVomit (position, normal);
 	}
@@ -156,7 +172,8 @@ public class PlayerClientController : NetworkBehaviour {
 	[Server]
 	void SpawnVomit(Vector3 position, Vector3 normal){
 		Transform vomit = Instantiate (nc.spawnPrefabs [0], position, new Quaternion (0, 0, 0, 0)).transform;
-		vomit.forward = normal.normalized;
+		vomit.up = normal.normalized;
 		NetworkServer.Spawn (vomit.gameObject);
 	}
+	*/
 }

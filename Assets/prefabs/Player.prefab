@@ -1585,17 +1585,18 @@ GameObject:
   m_Component:
   - component: {fileID: 4046684451916722}
   - component: {fileID: 20857861467560204}
-  - component: {fileID: 124876983941696976}
   - component: {fileID: 92916047925919664}
+  - component: {fileID: 124876983941696976}
   - component: {fileID: 81073186592297636}
   - component: {fileID: 65795612763881098}
+  - component: {fileID: 114506664696422208}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1619211277803154
 GameObject:
   m_ObjectHideFlags: 1
@@ -3593,7 +3594,7 @@ Transform:
   m_GameObject: {fileID: 1209278784033012}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4046684451916722}
   - {fileID: 4529531057657696}
@@ -4437,7 +4438,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -4452,7 +4453,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -4648,6 +4649,22 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114506664696422208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608673421132784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d1945bbd58b4cf98eb19621dd83cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleRenderers: []
+  blurRadius: 0.02
+  thicknessCutoff: 0.874
+  colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
+  fluidMaterial: {fileID: 2100000, guid: 29a7ed8ac869b4177a79933287fb9de8, type: 2}
 --- !u!114 &114575460342817634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4659,8 +4676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0224b9284e1e79b49aac1d90d943700c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 10
+  speed: 1
+  rotationSpeed: 1
   playerCamera: {fileID: 20857861467560204}
   Drunker: {fileID: 9000000, guid: 9cce769310c84114da68f651a869fb64, type: 3}
   Cleaner: {fileID: 9000000, guid: 7209c293914629e4fba7171cc6a88426, type: 3}
