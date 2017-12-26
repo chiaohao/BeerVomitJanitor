@@ -2262,6 +2262,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1974280807168282
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4592516139649764}
+  m_Layer: 0
+  m_Name: DrunkerMouth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1978427852014814
 GameObject:
   m_ObjectHideFlags: 1
@@ -2369,7 +2384,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608673421132784}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 3.02, y: 17.68, z: -7.42}
+  m_LocalPosition: {x: 3.02, y: 15.5, z: -7.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4591956426354310}
@@ -3616,6 +3631,19 @@ Transform:
   m_Father: {fileID: 4535694261533828}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4592516139649764
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1974280807168282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -2.2, z: 0.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4668486909169270}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4595393504744946
 Transform:
   m_ObjectHideFlags: 1
@@ -3705,7 +3733,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0003338122, y: 2.064169, z: 0.43741554}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4592516139649764}
   m_Father: {fileID: 4198021059610690}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4676,13 +4705,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0224b9284e1e79b49aac1d90d943700c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  rotationSpeed: 1
+  speed: 2
+  rotationSpeed: 10
   playerCamera: {fileID: 20857861467560204}
   Drunker: {fileID: 9000000, guid: 9cce769310c84114da68f651a869fb64, type: 3}
   Cleaner: {fileID: 9000000, guid: 7209c293914629e4fba7171cc6a88426, type: 3}
   DrunkerObject: {fileID: 1261413921809504}
   CleanerObject: {fileID: 1199343286992630}
+  DrunkerMouth: {fileID: 1974280807168282}
 --- !u!114 &114604805930357062
 MonoBehaviour:
   m_ObjectHideFlags: 1

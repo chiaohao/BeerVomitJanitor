@@ -19,6 +19,7 @@ public class PlayerClientController : NetworkBehaviour {
 	public Avatar Cleaner;
 	public GameObject DrunkerObject;
 	public GameObject CleanerObject;
+	public GameObject DrunkerMouth;
 
 	bool lockJump;
 	bool lockVomit;
@@ -46,13 +47,12 @@ public class PlayerClientController : NetworkBehaviour {
 				if (p.NetworkId == connectionToServer.connectionId)
 					characterId = p.CharacterId;
 			}
-			FindObjectOfType<VomitPlacesController> ().SetVomitCameraRenderer ();
+			FindObjectOfType<VomitEmittersController> ().SetVomitCameraRenderer ();
 		} 
 		else {
 			playerCamera.gameObject.SetActive (false);
 			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
-
 
 		lockJump = false;
 		lockVomit = false;
@@ -77,6 +77,7 @@ public class PlayerClientController : NetworkBehaviour {
 			DrunkerObject.SetActive (true);
 			CleanerObject.SetActive (false);
 			animator.avatar = Drunker;
+			FindObjectOfType<VomitEmittersController> ().SetDrunkerMouth (DrunkerMouth);
 		}
 
 		if (isLocalPlayer) {
@@ -104,7 +105,7 @@ public class PlayerClientController : NetworkBehaviour {
 			}
 
 			if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
-				GetComponent<Rigidbody> ().AddForce (Vector3.up * 10, ForceMode.Impulse);
+				GetComponent<Rigidbody> ().AddForce (Vector3.up * 6, ForceMode.Impulse);
 				animator.SetBool ("jump", true);
 				lockJump = true;
 				lockVomit = true;
@@ -124,7 +125,7 @@ public class PlayerClientController : NetworkBehaviour {
 						ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
 						CmdSpawnVomit (hitPos, hitNorm);
 						*/
-						CmdVomit (0);
+						CmdVomit ();
 
 						animator.SetBool ("vomit", true);
 						lockVomit = true;
@@ -155,13 +156,13 @@ public class PlayerClientController : NetworkBehaviour {
 	}
 
 	[Command]
-	public void CmdVomit(int index){
-		RpcVomit (index);
+	public void CmdVomit(){
+		RpcVomit ();
 	}
 
 	[ClientRpc]
-	public void RpcVomit(int index){
-		FindObjectOfType<VomitPlacesController> ().VomitToIndex (index);
+	public void RpcVomit(){
+		FindObjectOfType<VomitEmittersController> ().VomitToIndex ();
 	}
 	/*
 	[Command]

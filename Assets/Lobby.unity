@@ -3700,6 +3700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleRenderers:
   - {fileID: 0}
+  - {fileID: 0}
   blurRadius: 0.02
   thicknessCutoff: 1.2
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
