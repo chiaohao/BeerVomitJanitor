@@ -21,6 +21,7 @@ public class PlayerClientController : NetworkBehaviour {
 	public GameObject CleanerObject;
 	public GameObject DrunkerMouth;
 
+	bool isAnimatedSpecial;
 	bool lockJump;
 	bool lockVomit;
 	bool lockWalk;
@@ -54,6 +55,7 @@ public class PlayerClientController : NetworkBehaviour {
 			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
 
+		isAnimatedSpecial = true;
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
@@ -81,11 +83,26 @@ public class PlayerClientController : NetworkBehaviour {
 		}
 
 		if (isLocalPlayer) {
+			//Debug.Log (animator.GetCurrentAnimatorStateInfo (0).IsName("Drunker Jump"));
 			//Debug.Log (connectionToServer.connectionId);
 			//movement
-			animator.SetBool ("jump", false);
-			animator.SetBool ("vomit", false);
-			animator.SetBool ("clean", false);
+			if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Drunker Jump") || animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Jump")) {
+				isAnimatedSpecial = true;
+				animator.SetBool ("jump", false);
+			} 
+			else if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Drunker Vomit")) {
+				isAnimatedSpecial = true;
+				animator.SetBool ("vomit", false);
+			} 
+			else if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean")) {
+				isAnimatedSpecial = true;
+				animator.SetBool ("clean", false);
+			} 
+			else {
+				if (isAnimatedSpecial)
+					unlockAction ();
+			}
+			
 			if (!lockWalk) {
 				Vector3 move = Vector3.Normalize (Input.GetAxis ("Horizontal") * transform.right + Input.GetAxis ("Vertical") * transform.forward) * speed * Time.deltaTime;
 				transform.Translate (move, Space.World);
@@ -105,11 +122,10 @@ public class PlayerClientController : NetworkBehaviour {
 			}
 
 			if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
-				GetComponent<Rigidbody> ().AddForce (Vector3.up * 6, ForceMode.Impulse);
+				GetComponent<Rigidbody> ().AddForce (Vector3.up * 1, ForceMode.Impulse);
 				animator.SetBool ("jump", true);
 				lockJump = true;
 				lockVomit = true;
-				StartCoroutine (unlockAction (79f / 60f));
 			}
 
 			//raycast
@@ -128,31 +144,30 @@ public class PlayerClientController : NetworkBehaviour {
 						CmdVomit ();
 
 						animator.SetBool ("vomit", true);
+						isAnimatedSpecial = false;
 						lockVomit = true;
 						lockJump = true;
 						lockWalk = true;
-						StartCoroutine (unlockAction (317f / 60f));
 					}
 				} 
 				else if (animator.GetBool ("Cleaner")) {
 					if (Input.GetAxisRaw ("Fire1") != 0f && !lockClean) {
 						animator.SetBool ("clean", true);
+						isAnimatedSpecial = false;
 						lockJump = true;
 						lockWalk = true;
-						StartCoroutine (unlockAction (3f * 78f / 60f));
-					};
+					}
 				}
 			}
 		}
 	}
 
-	IEnumerator unlockAction (float seconds){
-		yield return new WaitForSeconds(seconds);
+	void unlockAction (){
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
 		lockClean = false;
-		//print ("unlock");
+		isAnimatedSpecial = true;
 	}
 
 	[Command]
