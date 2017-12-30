@@ -128,30 +128,23 @@ public class PlayerClientController : NetworkBehaviour {
 				lockVomit = true;
 			}
 
-			//raycast
-			ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-			if (Physics.Raycast (ray, out hit, rayLength)) {
-				//Debug.Log (hit.transform.name);
-				if (animator.GetBool ("Drunker")) {
-					if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
-						Vector3 hitPos = hit.point;
-						Vector3 hitNorm = hit.normal;
-						/*
-						//register vomit prefab
-						ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
-						CmdSpawnVomit (hitPos, hitNorm);
-						*/
-						CmdVomit ();
-
-						animator.SetBool ("vomit", true);
-						isAnimatedSpecial = false;
-						lockVomit = true;
-						lockJump = true;
-						lockWalk = true;
-					}
-				} 
-				else if (animator.GetBool ("Cleaner")) {
+			//special actions
+			if (animator.GetBool ("Drunker")) {
+				if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
+					CmdVomit ();
+					animator.SetBool ("vomit", true);
+					isAnimatedSpecial = false;
+					lockVomit = true;
+					lockJump = true;
+					lockWalk = true;
+				}
+			} 
+			else if (animator.GetBool ("Cleaner")) {
+				int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
+				if (nearestEmitterID != -1) {
+					Debug.Log ("cleannnnnnnnnnnnnnnnnnnnnnnn");
 					if (Input.GetAxisRaw ("Fire1") != 0f && !lockClean) {
+						CmdClean (nearestEmitterID);
 						animator.SetBool ("clean", true);
 						isAnimatedSpecial = false;
 						lockJump = true;
@@ -178,6 +171,16 @@ public class PlayerClientController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcVomit(){
 		FindObjectOfType<VomitEmittersController> ().VomitToIndex ();
+	}
+
+	[Command]
+	public void CmdClean(int id){
+		RpcClean (id);
+	}
+
+	[ClientRpc]
+	public void RpcClean(int id){
+		FindObjectOfType<VomitEmittersController> ().CleanEmitter (id);
 	}
 	/*
 	[Command]
