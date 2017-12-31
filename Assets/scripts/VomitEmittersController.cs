@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Obi;
 
 public class VomitEmittersController : MonoBehaviour {
 
-	int currentEmitterID;
+	bool[] availableEmitter;
 	GameObject DrunkerMouth;
 	Transform CurrentEmitter;
 	bool isVomitting;
 	int cleaningEmitterID;
 
 	void Start(){
-		currentEmitterID = 0;
+		availableEmitter = new bool[transform.childCount];
+		for (int i = 0; i < availableEmitter.Length; i++)
+			availableEmitter [i] = true;
 		isVomitting = false;
 		cleaningEmitterID = -1;
 	}
@@ -21,17 +24,21 @@ public class VomitEmittersController : MonoBehaviour {
 		if (isVomitting) {
 			CurrentEmitter.position = DrunkerMouth.transform.position;
 			CurrentEmitter.forward = DrunkerMouth.transform.forward;
-			if (CurrentEmitter.GetComponent<ObiEmitter> ().ActiveParticles == CurrentEmitter.GetComponent<ObiEmitter> ().NumParticles) {
+			CurrentEmitter.GetComponent<ObiEmitter> ().speed = 0.2f;
+			if (CurrentEmitter.GetComponent<ObiEmitter> ().ActiveParticles == CurrentEmitter.GetComponent<ObiEmitter> ().NumParticles)
 				isVomitting = false;
-				currentEmitterID += 1;
-			}
 		}
 		if (cleaningEmitterID >= 0) {
 			float s = transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale;
-			float ns = s - Time.deltaTime * 0.2f;
+			float ns = s - Time.deltaTime * 0.4f;
 			transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale = ns > 0f ? ns : 0f;
-			if (ns <= 0f)
+			if (ns <= 0f) {
+				transform.GetChild (cleaningEmitterID).GetComponent<ObiEmitter> ().speed = 0f;
+				transform.GetChild (cleaningEmitterID).GetComponent<ObiEmitter> ().KillAll ();
+				transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale = 1.7f;
+				availableEmitter [cleaningEmitterID] = true;
 				cleaningEmitterID = -1;
+			}
 		}
 	}
 
@@ -48,16 +55,17 @@ public class VomitEmittersController : MonoBehaviour {
 
 	public void VomitToIndex () {
 		isVomitting = true;
-		CurrentEmitter = transform.GetChild (currentEmitterID);
-		transform.GetChild (currentEmitterID).GetComponent<ObiEmitter> ().speed = 0.2f;
+		int id = Array.IndexOf<bool> (availableEmitter, true);
+		availableEmitter [id] = false;
+		CurrentEmitter = transform.GetChild (id);
 	}
 
 	public int GetCleanableEmitter(Transform cleaner) {
 		int id = -1;
 		float minDist = float.MaxValue;
 
-		for (int i = 0; i < currentEmitterID; i++) {
-			if (transform.GetChild (i).GetComponent<ObiParticleRenderer> ().radiusScale == 0 || transform.GetChild (i).GetComponent<ObiEmitter> ().ActiveParticles == 0)
+		for (int i = 0; i < availableEmitter.Length; i++) {
+			if (availableEmitter[i] == true)
 				continue;
 			Vector3 cp = cleaner.position;
 			Vector3 ep = transform.GetChild (i).position;

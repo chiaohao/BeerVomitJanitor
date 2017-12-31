@@ -4,11 +4,18 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Obi;
 
+public enum handItems{
+	none,
+	broom,
+	bottle,
+}
+
 public class PlayerClientController : NetworkBehaviour {
 
 	//ServerDataController sdc;
 	NetworkController nc;
 	ServerDataController sdc;
+	GameUIController guic;
 
 	//movement
 	public float speed;
@@ -27,8 +34,15 @@ public class PlayerClientController : NetworkBehaviour {
 	bool lockWalk;
 	bool lockClean;
 
+	//syncvar
 	[SyncVar]
 	int characterId;
+	[SyncVar]
+	int drunkLevel;
+	[SyncVar]
+	handItems handItem;
+	[SyncVar]
+	int broomDirtLevel;
 
 	//raycast
 	Ray ray;
@@ -39,6 +53,7 @@ public class PlayerClientController : NetworkBehaviour {
 	void Start(){
 		sdc = FindObjectOfType<ServerDataController> ();
 		nc = FindObjectOfType<NetworkController> ();
+		guic = FindObjectOfType<GameUIController> ();
 		animator = GetComponentInChildren<Animator> ();
 		Cursor.lockState = CursorLockMode.Locked;
 
@@ -141,8 +156,8 @@ public class PlayerClientController : NetworkBehaviour {
 			} 
 			else if (animator.GetBool ("Cleaner")) {
 				int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
+				guic.SetBroomIcon (nearestEmitterID == -1 ? false : true);
 				if (nearestEmitterID != -1) {
-					Debug.Log ("cleannnnnnnnnnnnnnnnnnnnnnnn");
 					if (Input.GetAxisRaw ("Fire1") != 0f && !lockClean) {
 						CmdClean (nearestEmitterID);
 						animator.SetBool ("clean", true);
