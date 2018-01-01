@@ -197,6 +197,17 @@ public class PlayerClientController : NetworkBehaviour {
 	public void RpcClean(int id){
 		FindObjectOfType<VomitEmittersController> ().CleanEmitter (id);
 	}
+
+	[Command]
+	public void CmdDrink(int id){
+		RpcDrink (id);
+		drunkLevel += 1;
+	}
+
+	[ClientRpc]
+	public void RpcDrink(int id){
+		FindObjectOfType<BeerBottlesController> ().DrinkBottle (id);
+	}
 	/*
 	[Command]
 	public void CmdSpawnVomit(Vector3 position, Vector3 normal){
