@@ -21,6 +21,7 @@ public class PlayerClientController : NetworkBehaviour {
 	public GameObject CleanerObject;
 	public GameObject DrunkerMouth;
 
+	bool isAnimatedSpecial;
 	bool lockJump;
 	bool lockVomit;
 	bool lockWalk;
@@ -54,6 +55,7 @@ public class PlayerClientController : NetworkBehaviour {
 			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
 
+		isAnimatedSpecial = true;
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
@@ -81,11 +83,26 @@ public class PlayerClientController : NetworkBehaviour {
 		}
 
 		if (isLocalPlayer) {
+			//Debug.Log (animator.GetCurrentAnimatorStateInfo (0).IsName("Drunker Jump"));
 			//Debug.Log (connectionToServer.connectionId);
 			//movement
-			animator.SetBool ("jump", false);
-			animator.SetBool ("vomit", false);
-			animator.SetBool ("clean", false);
+			if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Drunker Jump") || animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Jump")) {
+				isAnimatedSpecial = true;
+				animator.SetBool ("jump", false);
+			} 
+			else if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Drunker Vomit")) {
+				isAnimatedSpecial = true;
+				animator.SetBool ("vomit", false);
+			} 
+			else if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean")) {
+				isAnimatedSpecial = true;
+				animator.SetBool ("clean", false);
+			} 
+			else {
+				if (isAnimatedSpecial)
+					unlockAction ();
+			}
+			
 			if (!lockWalk) {
 				Vector3 move = Vector3.Normalize (Input.GetAxis ("Horizontal") * transform.right + Input.GetAxis ("Vertical") * transform.forward) * speed * Time.deltaTime;
 				transform.Translate (move, Space.World);
@@ -105,54 +122,45 @@ public class PlayerClientController : NetworkBehaviour {
 			}
 
 			if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
-				GetComponent<Rigidbody> ().AddForce (Vector3.up * 6, ForceMode.Impulse);
+				GetComponent<Rigidbody> ().AddForce (Vector3.up * 1, ForceMode.Impulse);
 				animator.SetBool ("jump", true);
 				lockJump = true;
 				lockVomit = true;
-				StartCoroutine (unlockAction (79f / 60f));
 			}
 
-			//raycast
-			ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-			if (Physics.Raycast (ray, out hit, rayLength)) {
-				//Debug.Log (hit.transform.name);
-				if (animator.GetBool ("Drunker")) {
-					if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
-						Vector3 hitPos = hit.point;
-						Vector3 hitNorm = hit.normal;
-						/*
-						//register vomit prefab
-						ClientScene.RegisterPrefab (nc.spawnPrefabs [0]);
-						CmdSpawnVomit (hitPos, hitNorm);
-						*/
-						CmdVomit ();
-
-						animator.SetBool ("vomit", true);
-						lockVomit = true;
-						lockJump = true;
-						lockWalk = true;
-						StartCoroutine (unlockAction (317f / 60f));
-					}
-				} 
-				else if (animator.GetBool ("Cleaner")) {
+			//special actions
+			if (animator.GetBool ("Drunker")) {
+				if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
+					CmdVomit ();
+					animator.SetBool ("vomit", true);
+					isAnimatedSpecial = false;
+					lockVomit = true;
+					lockJump = true;
+					lockWalk = true;
+				}
+			} 
+			else if (animator.GetBool ("Cleaner")) {
+				int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
+				if (nearestEmitterID != -1) {
+					Debug.Log ("cleannnnnnnnnnnnnnnnnnnnnnnn");
 					if (Input.GetAxisRaw ("Fire1") != 0f && !lockClean) {
+						CmdClean (nearestEmitterID);
 						animator.SetBool ("clean", true);
+						isAnimatedSpecial = false;
 						lockJump = true;
 						lockWalk = true;
-						StartCoroutine (unlockAction (3f * 78f / 60f));
-					};
+					}
 				}
 			}
 		}
 	}
 
-	IEnumerator unlockAction (float seconds){
-		yield return new WaitForSeconds(seconds);
+	void unlockAction (){
 		lockJump = false;
 		lockVomit = false;
 		lockWalk = false;
 		lockClean = false;
-		//print ("unlock");
+		isAnimatedSpecial = true;
 	}
 
 	[Command]
@@ -163,6 +171,16 @@ public class PlayerClientController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcVomit(){
 		FindObjectOfType<VomitEmittersController> ().VomitToIndex ();
+	}
+
+	[Command]
+	public void CmdClean(int id){
+		RpcClean (id);
+	}
+
+	[ClientRpc]
+	public void RpcClean(int id){
+		FindObjectOfType<VomitEmittersController> ().CleanEmitter (id);
 	}
 	/*
 	[Command]
