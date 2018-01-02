@@ -39,11 +39,11 @@ public class PlayerClientController : NetworkBehaviour {
 	[SyncVar]
 	int characterId;
 	[SyncVar]
-	int drunkLevel;
+	float drunkLevel;
 	[SyncVar]
 	handItems handItem;
 	[SyncVar]
-	int broomDirtLevel;
+	float mopDirtLevel;
 
 	//raycast
 	Ray ray;
@@ -63,6 +63,7 @@ public class PlayerClientController : NetworkBehaviour {
 			foreach (ServerDataController.PlayerAttribute p in sdc.players) {
 				if (p.NetworkId == connectionToServer.connectionId)
 					characterId = p.CharacterId;
+				FindObjectOfType<GameUIController> ().InitPlayerUI (characterId);
 			}
 			FindObjectOfType<VomitEmittersController> ().SetVomitCameraRenderer ();
 		} 
@@ -71,9 +72,9 @@ public class PlayerClientController : NetworkBehaviour {
 			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
 
-		drunkLevel = 1;
+		drunkLevel = 0.1f;
 		handItem = handItems.none;
-		broomDirtLevel = 0;
+		mopDirtLevel = 0f;
 
 		isAnimatedSpecial = true;
 		lockJump = false;
@@ -161,9 +162,11 @@ public class PlayerClientController : NetworkBehaviour {
 
 				//special actions
 				if (animator.GetBool ("Drunker")) {
-					if (Input.GetButtonDown ("Fire1") && !lockVomit && drunkLevel >= 2) {
+					if (Input.GetButtonDown ("Fire1") && !lockVomit && drunkLevel >= 0.2f) {
 						CmdVomit ();
-						drunkLevel -= 2;
+						drunkLevel -= 0.2f;
+						drunkLevel = Mathf.Clamp01 (drunkLevel);
+						guic.FillVomit (drunkLevel);
 						animator.SetBool ("vomit", true);
 						isAnimatedSpecial = false;
 						lockVomit = true;
@@ -177,7 +180,9 @@ public class PlayerClientController : NetworkBehaviour {
 						if (Input.GetButtonDown ("Fire2")) {
 							FindObjectOfType<BeerBottlesController> ().DrinkBottle (nearestBottleID);
 							CmdDrink (nearestBottleID);
-							drunkLevel += 1;
+							drunkLevel += 0.1f;
+							drunkLevel = Mathf.Clamp01 (drunkLevel);
+							guic.FillVomit (drunkLevel);
 						}
 					}
 				} else if (animator.GetBool ("Cleaner")) {
@@ -186,6 +191,9 @@ public class PlayerClientController : NetworkBehaviour {
 					if (nearestEmitterID != -1) {
 						if (Input.GetButtonDown ("Fire1") && !lockClean) {
 							CmdClean (nearestEmitterID);
+							mopDirtLevel += 0.35f;
+							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);
+							guic.FillMop (mopDirtLevel);
 							animator.SetBool ("clean", true);
 							isAnimatedSpecial = false;
 							lockJump = true;
