@@ -33,6 +33,7 @@ public class PlayerClientController : NetworkBehaviour {
 	bool lockVomit;
 	bool lockWalk;
 	bool lockClean;
+	bool waitingAction;
 
 	//syncvar
 	[SyncVar]
@@ -69,6 +70,10 @@ public class PlayerClientController : NetworkBehaviour {
 			playerCamera.gameObject.SetActive (false);
 			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
+
+		drunkLevel = 1;
+		handItem = handItems.none;
+		broomDirtLevel = 0;
 
 		isAnimatedSpecial = true;
 		lockJump = false;
@@ -136,34 +141,57 @@ public class PlayerClientController : NetworkBehaviour {
 				}
 			}
 
-			if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
-				GetComponent<Rigidbody> ().AddForce (Vector3.up * 1, ForceMode.Impulse);
-				animator.SetBool ("jump", true);
-				lockJump = true;
-				lockVomit = true;
-			}
-
-			//special actions
-			if (animator.GetBool ("Drunker")) {
-				if (Input.GetAxisRaw ("Fire1") != 0f && !lockVomit) {
-					CmdVomit ();
-					animator.SetBool ("vomit", true);
-					isAnimatedSpecial = false;
-					lockVomit = true;
+			if (!waitingAction) {
+				if (Input.GetAxisRaw ("Jump") != 0f && !lockJump) {
+					GetComponent<Rigidbody> ().AddForce (Vector3.up * 1, ForceMode.Impulse);
+					animator.SetBool ("jump", true);
+					StartCoroutine(waiting ());
 					lockJump = true;
-					lockWalk = true;
+					lockVomit = true;
 				}
-			} 
-			else if (animator.GetBool ("Cleaner")) {
-				int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
-				guic.SetBroomIcon (nearestEmitterID == -1 ? false : true);
-				if (nearestEmitterID != -1) {
-					if (Input.GetAxisRaw ("Fire1") != 0f && !lockClean) {
-						CmdClean (nearestEmitterID);
-						animator.SetBool ("clean", true);
+					
+				int nearestDoorID = FindObjectOfType<DoorsController> ().GetAvailableDoor (transform);
+				guic.SetDoorIcon (nearestDoorID == -1 ? false : true);
+				if (nearestDoorID != -1) {
+					if (Input.GetKeyDown (KeyCode.E)) {
+						CmdOpenDoor (nearestDoorID);
+						StartCoroutine(waiting ());
+					}
+				}
+
+				//special actions
+				if (animator.GetBool ("Drunker")) {
+					if (Input.GetButtonDown ("Fire1") && !lockVomit && drunkLevel >= 2) {
+						CmdVomit ();
+						drunkLevel -= 2;
+						animator.SetBool ("vomit", true);
 						isAnimatedSpecial = false;
+						lockVomit = true;
 						lockJump = true;
 						lockWalk = true;
+						StartCoroutine(waiting ());
+					}
+					int nearestBottleID = FindObjectOfType<BeerBottlesController> ().GetAvailableBottle (transform);
+					guic.SetDrinkIcon (nearestBottleID == -1 ? false : true);
+					if (nearestBottleID != -1) {
+						if (Input.GetButtonDown ("Fire2")) {
+							FindObjectOfType<BeerBottlesController> ().DrinkBottle (nearestBottleID);
+							CmdDrink (nearestBottleID);
+							drunkLevel += 1;
+						}
+					}
+				} else if (animator.GetBool ("Cleaner")) {
+					int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
+					guic.SetBroomIcon (nearestEmitterID == -1 ? false : true);
+					if (nearestEmitterID != -1) {
+						if (Input.GetButtonDown ("Fire1") && !lockClean) {
+							CmdClean (nearestEmitterID);
+							animator.SetBool ("clean", true);
+							isAnimatedSpecial = false;
+							lockJump = true;
+							lockWalk = true;
+							StartCoroutine(waiting ());
+						}
 					}
 				}
 			}
@@ -176,6 +204,11 @@ public class PlayerClientController : NetworkBehaviour {
 		lockWalk = false;
 		lockClean = false;
 		isAnimatedSpecial = true;
+	}
+
+	IEnumerator waiting(){
+		yield return new WaitForSeconds (0.5f);
+		waitingAction = false;
 	}
 
 	[Command]
@@ -201,12 +234,21 @@ public class PlayerClientController : NetworkBehaviour {
 	[Command]
 	public void CmdDrink(int id){
 		RpcDrink (id);
-		drunkLevel += 1;
 	}
 
 	[ClientRpc]
 	public void RpcDrink(int id){
 		FindObjectOfType<BeerBottlesController> ().DrinkBottle (id);
+	}
+
+	[Command]
+	public void CmdOpenDoor(int id){
+		RpcOpenDoor (id);
+	}
+
+	[ClientRpc]
+	public void RpcOpenDoor(int id){
+		FindObjectOfType<DoorsController> ().SwitchDoor (id);
 	}
 	/*
 	[Command]

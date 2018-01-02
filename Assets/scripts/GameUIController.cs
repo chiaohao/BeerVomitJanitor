@@ -8,6 +8,8 @@ public class GameUIController : MonoBehaviour {
 	ServerDataController sdc;
 	public Text timeText;
 	public GameObject broomIcon;
+	public GameObject drinkIcon;
+	public GameObject doorIcon;
 
 	void Start () {
 		
@@ -20,5 +22,12 @@ public class GameUIController : MonoBehaviour {
 
 	public void SetBroomIcon(bool i){
 		broomIcon.SetActive (i);
+	}
+
+	public void SetDrinkIcon(bool i){
+		drinkIcon.SetActive (i);
+	}
+	public void SetDoorIcon(bool i){
+		doorIcon.SetActive (i);
 	}
 }

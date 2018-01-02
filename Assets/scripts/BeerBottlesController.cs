@@ -44,5 +44,6 @@ public class BeerBottlesController : MonoBehaviour {
 
 	public void DrinkBottle(int id){
 		transform.GetChild (id).GetComponent<MeshRenderer> ().enabled = false;
+		availableBottle [id] = false;
 	}
 }
