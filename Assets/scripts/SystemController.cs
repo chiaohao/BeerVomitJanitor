@@ -20,13 +20,14 @@ public class SystemController : MonoBehaviour {
 
 	public GameObject lobbyPlayerList;
 	public GameObject gameStartBtn;
+	public GameObject readyBtn;
 
 	public float gametime = 5f * 60f;
 
 	void Start () {
 		nc = FindObjectOfType<NetworkController> ();
 		gsc = GetComponent<GameStatusController> ();
-		hostIpText.text = "IP: " + Network.player.ipAddress;
+		hostIpText.text = Network.player.ipAddress;
 	}
 
 	public void onCreateRoomPressed(){
@@ -74,5 +75,9 @@ public class SystemController : MonoBehaviour {
 	public void setupLobbyPlayer(GameObject lobbyPlayer, bool isServer){
 		lobbyPlayer.transform.SetParent (lobbyPlayerList.transform);
 		gameStartBtn.SetActive(isServer ? true : false);
+	}
+
+	public void onExitGamePressed(){
+		Application.Quit ();
 	}
 }

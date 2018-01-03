@@ -12,7 +12,6 @@ public class LobbyPlayerClientController : NetworkLobbyPlayer {
 	//UI
 	public GameObject waitingText;
 	public GameObject readyText;
-	public GameObject readyBtn;
 
 	//sync
 	[SyncVar]
@@ -39,21 +38,34 @@ public class LobbyPlayerClientController : NetworkLobbyPlayer {
 	}
 
 	void Update(){
+		transform.localScale = Vector3.one;
 		isReady = readyToBegin;
 		readyText.SetActive (isReady);
 		waitingText.SetActive (!isReady);
 		if (isLocalPlayer)
 			UpdateLocalPlayer ();
-		else
-			UpdateOtherPlayers ();
 	}
 
 	private void UpdateLocalPlayer(){
-		if (!isServer)
-			readyBtn.SetActive (true);
-	}
-
-	private void UpdateOtherPlayers(){
-		readyBtn.SetActive (false);
+		Button startBtn = FindObjectOfType<SystemController> ().gameStartBtn.GetComponent<Button> ();
+		Button readyBtn = FindObjectOfType<SystemController> ().readyBtn.GetComponent<Button> ();
+		string ip, port;
+		if (!isServer) {
+			startBtn.gameObject.SetActive (false);
+			readyBtn.gameObject.SetActive (true);
+			readyBtn.onClick.RemoveAllListeners ();
+			readyBtn.onClick.AddListener (SwitchReady);
+			ip = nc.networkAddress;
+			port = nc.networkPort.ToString();
+		} 
+		else {
+			startBtn.gameObject.SetActive (true);
+			readyBtn.gameObject.SetActive (false);
+			readyText.SetActive (false);
+			waitingText.SetActive (false);
+			ip = Network.player.ipAddress;
+			port = nc.networkPort.ToString();
+		}
+		FindObjectOfType<GameStatusController> ().UpdateLobbyUI (ip, port);
 	}
 }

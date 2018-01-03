@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 75f26a23ca1c6384c8c40b5e52805650
+timeCreated: 1514978259
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: pingwing
+  fontNames:
+  - pingwing
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

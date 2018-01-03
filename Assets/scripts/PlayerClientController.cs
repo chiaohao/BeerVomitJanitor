@@ -45,12 +45,6 @@ public class PlayerClientController : NetworkBehaviour {
 	[SyncVar]
 	float mopDirtLevel;
 
-	//raycast
-	Ray ray;
-	float rayLength = 15f;
-	RaycastHit hit;
-	bool isTrace;
-
 	void Start(){
 		sdc = FindObjectOfType<ServerDataController> ();
 		nc = FindObjectOfType<NetworkController> ();
@@ -81,12 +75,11 @@ public class PlayerClientController : NetworkBehaviour {
 		lockVomit = false;
 		lockWalk = false;
 		lockClean = false;
-
-		isTrace = true;
 	}
 
 
 	void Update(){
+		Debug.Log (isLocalPlayer);
 		if (characterId == 1) {
 			animator.SetBool ("Drunker", false);
 			animator.SetBool ("Cleaner", true);
