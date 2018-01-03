@@ -27,6 +27,7 @@ public class PlayerClientController : NetworkBehaviour {
 	public GameObject DrunkerObject;
 	public GameObject CleanerObject;
 	public GameObject DrunkerMouth;
+	public GameObject Mop;
 
 	bool isAnimatedSpecial;
 	bool lockJump;
@@ -79,7 +80,6 @@ public class PlayerClientController : NetworkBehaviour {
 
 
 	void Update(){
-		Debug.Log (isLocalPlayer);
 		if (characterId == 1) {
 			animator.SetBool ("Drunker", false);
 			animator.SetBool ("Cleaner", true);
@@ -95,6 +95,11 @@ public class PlayerClientController : NetworkBehaviour {
 			animator.avatar = Drunker;
 			FindObjectOfType<VomitEmittersController> ().SetDrunkerMouth (DrunkerMouth);
 		}
+
+		Mop.SetActive (animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean") ||
+			animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 0") || 
+			animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 1")
+			? true : false);
 
 		if (isLocalPlayer) {
 			//Debug.Log (animator.GetCurrentAnimatorStateInfo (0).IsName("Drunker Jump"));
@@ -194,6 +199,21 @@ public class PlayerClientController : NetworkBehaviour {
 							StartCoroutine(waiting ());
 						}
 					}
+
+					bool isMopwashable = FindObjectOfType<MopWashBathController> ().IsMopWashAvailable (transform);
+					//guic
+					if (isMopwashable) {
+						if (Input.GetButtonDown ("Fire2") && !lockClean) {
+							mopDirtLevel = 0f;
+							guic.FillMop (mopDirtLevel);
+							animator.SetBool ("clean", true);
+							isAnimatedSpecial = false;
+							lockJump = true;
+							lockWalk = true;
+							StartCoroutine(waiting ());
+						}
+					}
+
 				}
 			}
 		}
