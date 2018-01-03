@@ -37,6 +37,8 @@ public class NetworkController : NetworkLobbyManager {
 		base.OnClientSceneChanged (conn);
 		if (SceneManager.GetActiveScene ().name == playScene)
 			gsc.switchStatus (GameStatus.Playing);
+		if (SceneManager.GetActiveScene ().name == lobbyScene)
+			gsc.switchStatus (GameStatus.Lobby);
 	}
 
 }

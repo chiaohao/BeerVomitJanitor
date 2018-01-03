@@ -10,6 +10,7 @@ public class GameUIController : MonoBehaviour {
 	public GameObject broomIcon;
 	public GameObject drinkIcon;
 	public GameObject doorIcon;
+	public GameObject pukeIcon;
 
 	public GameObject vomitGauge;
 	public Image vomitGaugeFill;
@@ -17,15 +18,22 @@ public class GameUIController : MonoBehaviour {
 	public Image mopFill;
 	public Image dectetorFill;
 
+	public GameObject loadingPanel;
+	public GameObject winPanel;
+	public Text winText;
+	public Button returnBtn;
+
 	void Start () {
 		vomitGaugeFill.fillAmount = 0f;
 		mopFill.fillAmount = 1f;
 		dectetorFill.fillAmount = 0f;
+		StartCoroutine (WaitLoading ());
 	}
 
 	void Update () {
 		sdc = FindObjectOfType<ServerDataController> ();
 		timeText.text = Mathf.Floor (sdc.gameTime / 60f).ToString ("00") + " : " + (sdc.gameTime % 60).ToString ("00");
+		FillDectetor (Mathf.Clamp01 (sdc.dirtyLevel));
 	}
 
 	public void InitPlayerUI(int i){
@@ -46,8 +54,13 @@ public class GameUIController : MonoBehaviour {
 	public void SetDrinkIcon(bool i){
 		drinkIcon.SetActive (i);
 	}
+
 	public void SetDoorIcon(bool i){
 		doorIcon.SetActive (i);
+	}
+
+	public void SetPukeIcon(bool i){
+		pukeIcon.SetActive (i);
 	}
 
 	public void FillVomit(float i){
@@ -62,4 +75,15 @@ public class GameUIController : MonoBehaviour {
 		dectetorFill.fillAmount = Mathf.Clamp01 (i);
 	}
 
+	IEnumerator WaitLoading(){
+		yield return new WaitForSeconds (5);
+		loadingPanel.SetActive (false);
+	}
+
+	public void SetWinPanel(bool i){
+		winPanel.SetActive (true);
+		winText.text = i ? "Drunker Wins!" : "Cleaner Wins!";
+		returnBtn.onClick.AddListener (delegate{FindObjectOfType<GameStatusController> ().switchStatus (GameStatus.Lobby);});
+		returnBtn.onClick.AddListener (delegate{FindObjectOfType<NetworkController> ().SendReturnToLobby();});
+	}
 }

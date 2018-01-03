@@ -8,18 +8,36 @@ public class LobbyPlayerClientController : NetworkLobbyPlayer {
 	//controllers
 	SystemController sc;
 	NetworkController nc;
+	ServerDataController sdc;
 
 	//UI
 	public GameObject waitingText;
 	public GameObject readyText;
+	public Image head;
+
+	public Sprite Drunker;
+	public Sprite Cleaner;
 
 	//sync
 	[SyncVar]
 	public bool isReady;
 
+	[SyncVar]
+	int characterId;
+
 	void Awake(){
 		sc = FindObjectOfType<SystemController> ();
 		nc = FindObjectOfType<NetworkController> ();
+		sdc = FindObjectOfType<ServerDataController> ();
+	}
+
+	void Start(){
+		if (isLocalPlayer) {
+			foreach (ServerDataController.PlayerAttribute p in sdc.players) {
+				if (p.NetworkId == connectionToServer.connectionId)
+					characterId = p.CharacterId;
+			}
+		} 
 	}
 
 	public void SwitchReady(){
@@ -38,6 +56,13 @@ public class LobbyPlayerClientController : NetworkLobbyPlayer {
 	}
 
 	void Update(){
+		if (characterId == 1) {
+			head.sprite = Cleaner;
+		} 
+		else if (characterId == 0) {
+			head.sprite = Drunker;
+		}
+
 		transform.localScale = Vector3.one;
 		isReady = readyToBegin;
 		readyText.SetActive (isReady);
@@ -68,4 +93,5 @@ public class LobbyPlayerClientController : NetworkLobbyPlayer {
 		}
 		FindObjectOfType<GameStatusController> ().UpdateLobbyUI (ip, port);
 	}
+		
 }

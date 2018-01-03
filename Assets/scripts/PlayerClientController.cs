@@ -160,17 +160,23 @@ public class PlayerClientController : NetworkBehaviour {
 
 				//special actions
 				if (animator.GetBool ("Drunker")) {
-					if (Input.GetButtonDown ("Fire1") && !lockVomit && drunkLevel >= 0.2f) {
-						CmdVomit ();
-						drunkLevel -= 0.2f;
-						drunkLevel = Mathf.Clamp01 (drunkLevel);
-						guic.FillVomit (drunkLevel);
-						animator.SetBool ("vomit", true);
-						isAnimatedSpecial = false;
-						lockVomit = true;
-						lockJump = true;
-						lockWalk = true;
-						StartCoroutine(waiting ());
+					if (drunkLevel >= 0.2f) {
+						guic.SetPukeIcon (true);
+						if (Input.GetButtonDown ("Fire1") && !lockVomit) {
+							CmdVomit ();
+							drunkLevel -= 0.2f;
+							drunkLevel = Mathf.Clamp01 (drunkLevel);
+							guic.FillVomit (drunkLevel);
+							animator.SetBool ("vomit", true);
+							isAnimatedSpecial = false;
+							lockVomit = true;
+							lockJump = true;
+							lockWalk = true;
+							StartCoroutine (waiting ());
+						}
+					} 
+					else {
+						guic.SetPukeIcon (false);
 					}
 					int nearestBottleID = FindObjectOfType<BeerBottlesController> ().GetAvailableBottle (transform);
 					guic.SetDrinkIcon (nearestBottleID == -1 ? false : true);
@@ -187,7 +193,7 @@ public class PlayerClientController : NetworkBehaviour {
 					int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
 					guic.SetBroomIcon (nearestEmitterID == -1 ? false : true);
 					if (nearestEmitterID != -1) {
-						if (Input.GetButtonDown ("Fire1") && !lockClean) {
+						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 0.2f && !lockClean) {
 							CmdClean (nearestEmitterID);
 							mopDirtLevel += 0.35f;
 							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);
@@ -204,7 +210,7 @@ public class PlayerClientController : NetworkBehaviour {
 					//guic
 					if (isMopwashable) {
 						if (Input.GetButtonDown ("Fire2") && !lockClean) {
-							mopDirtLevel = 0f;
+							mopDirtLevel -= 0.5f;
 							guic.FillMop (mopDirtLevel);
 							animator.SetBool ("clean", true);
 							isAnimatedSpecial = false;
@@ -234,6 +240,7 @@ public class PlayerClientController : NetworkBehaviour {
 
 	[Command]
 	public void CmdVomit(){
+		FindObjectOfType<ServerDataController> ().dirtyLevel += 0.1f;
 		RpcVomit ();
 	}
 
@@ -244,6 +251,7 @@ public class PlayerClientController : NetworkBehaviour {
 
 	[Command]
 	public void CmdClean(int id){
+		FindObjectOfType<ServerDataController> ().dirtyLevel -= 0.1f;
 		RpcClean (id);
 	}
 

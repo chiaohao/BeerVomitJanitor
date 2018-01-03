@@ -11,6 +11,8 @@ public class ServerDataController : NetworkBehaviour {
 	GameStatusController gsc;
 	NetworkController nc;
 
+	public bool isGameStart;
+
 	//SyncLists
 	public struct PlayerAttribute
 	{
@@ -25,9 +27,15 @@ public class ServerDataController : NetworkBehaviour {
 	[SyncVar]
 	public float gameTime;
 
+	[SyncVar]
+	public float dirtyLevel;
+
 	void Awake(){
 		gsc = FindObjectOfType<GameStatusController> ();
 		nc = FindObjectOfType<NetworkController> ();
+
+		dirtyLevel = 0f;
+		isGameStart = false;;
 	}
 
 	public void UpdatePlayerNumText(int pn){
@@ -42,8 +50,21 @@ public class ServerDataController : NetworkBehaviour {
 	}
 
 	void Update(){
+		if (gameTime > 0f) {
+			isGameStart = true;
+		}
 		gameTime -= Time.deltaTime;
-		if (gameTime < 0f)
+		if (gameTime < 0f)  {
 			gameTime = 0f;
+			if (isGameStart) {
+				isGameStart = false;
+				if (dirtyLevel > 0.5f) {
+					FindObjectOfType<GameUIController> ().SetWinPanel (true);
+				} 
+				else {
+					FindObjectOfType<GameUIController> ().SetWinPanel (false);
+				}
+			}
+		}
 	}
 }

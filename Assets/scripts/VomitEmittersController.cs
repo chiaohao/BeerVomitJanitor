@@ -21,6 +21,11 @@ public class VomitEmittersController : MonoBehaviour {
 	}
 
 	void Update(){
+		for (int i = 0; i < availableEmitter.Length; i++) {
+			ObiEmitter e = transform.GetChild (i).GetComponent<ObiEmitter> ();
+			if (!availableEmitter [i] && e.ActiveParticles == e.NumParticles)
+				e.transform.position = e.GetParticlePosition (0);
+		}
 		if (isVomitting) {
 			CurrentEmitter.position = DrunkerMouth.transform.position;
 			CurrentEmitter.forward = DrunkerMouth.transform.forward;
