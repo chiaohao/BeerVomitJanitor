@@ -29,6 +29,13 @@ public class PlayerClientController : NetworkBehaviour {
 	public GameObject DrunkerMouth;
 	public GameObject Mop;
 
+	public AudioClip CleanMopSound;
+	public AudioClip DoorOpenSound;
+	public AudioClip DrinkSound;
+	public AudioClip MopSound;
+	public AudioClip VomitMixSound;
+
+
 	bool isAnimatedSpecial;
 	bool lockJump;
 	bool lockVomit;
