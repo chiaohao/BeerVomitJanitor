@@ -53,6 +53,7 @@ public class GameStatusController : MonoBehaviour {
 			ClientPanel.SetActive (true);
 			break;
 		case GameStatus.Lobby:
+			FindObjectOfType<SystemController> ().gameStartBtn.GetComponent<Button> ().interactable = true;
 			BackgroundPanel.SetActive (true);
 			MainPanel.SetActive (true);
 			LobbyPanel.SetActive (true);

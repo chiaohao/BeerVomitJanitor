@@ -79,10 +79,10 @@ Properties {
 
 				// simple lighting: diffuse
 		   	 	float ndotl = saturate( dot( n, normalize(i.lightDir) ) );
-				UNITY_LIGHT_ATTENUATION(atten,i,0);
+				//UNITY_LIGHT_ATTENUATION(atten,i,0);
 
 				// final lit color:
-				fo.color.rgb = _Color * i.color * (_LightColor0 * ndotl * atten + amb);
+				fo.color.rgb = _Color * i.color * (_LightColor0 * ndotl + amb);
 
 				// normalized device coordinates:
 				fo.depth = pos.z/pos.w;

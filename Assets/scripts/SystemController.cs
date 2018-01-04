@@ -30,6 +30,7 @@ public class SystemController : MonoBehaviour {
 		nc = FindObjectOfType<NetworkController> ();
 		gsc = GetComponent<GameStatusController> ();
 		hostIpText.text = Network.player.ipAddress;
+		gameStartBtn.GetComponent<Button> ().interactable = true;
 	}
 
 	public void onCreateRoomPressed(){
@@ -70,6 +71,7 @@ public class SystemController : MonoBehaviour {
 			else if (!lpcc.isReady)
 				return;
 		}
+		gameStartBtn.GetComponent<Button> ().interactable = false;
 		lpcc_local.SendReadyToBeginMessage ();
 	}
 

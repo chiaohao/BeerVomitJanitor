@@ -58,7 +58,7 @@ public class ServerDataController : NetworkBehaviour {
 			gameTime = 0f;
 			if (isGameStart) {
 				isGameStart = false;
-				if (dirtyLevel > 0.5f) {
+				if (dirtyLevel >= 0.2f) {
 					FindObjectOfType<GameUIController> ().SetWinPanel (true);
 				} 
 				else {

@@ -81,6 +81,7 @@ public class GameUIController : MonoBehaviour {
 	}
 
 	public void SetWinPanel(bool i){
+		Cursor.lockState = CursorLockMode.None;
 		winPanel.SetActive (true);
 		winText.text = i ? "Drunker Wins!" : "Cleaner Wins!";
 		returnBtn.onClick.AddListener (delegate{FindObjectOfType<GameStatusController> ().switchStatus (GameStatus.Lobby);});

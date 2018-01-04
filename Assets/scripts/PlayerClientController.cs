@@ -74,7 +74,8 @@ public class PlayerClientController : NetworkBehaviour {
 			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
 
-		drunkLevel = 0.1f;
+		drunkLevel = 1f;
+		FindObjectOfType<GameUIController> ().FillVomit (drunkLevel);
 		handItem = handItems.none;
 		mopDirtLevel = 0f;
 
@@ -120,7 +121,9 @@ public class PlayerClientController : NetworkBehaviour {
 				isAnimatedSpecial = true;
 				animator.SetBool ("vomit", false);
 			} 
-			else if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean")) {
+			else if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean") || 
+				animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 0") || 
+				animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 1")) {
 				isAnimatedSpecial = true;
 				animator.SetBool ("clean", false);
 			} 
@@ -197,10 +200,13 @@ public class PlayerClientController : NetworkBehaviour {
 						}
 					}
 				} else if (animator.GetBool ("Cleaner")) {
+					guic.SetPukeIcon (false);
 					int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
-					guic.SetBroomIcon (nearestEmitterID == -1 ? false : true);
+					bool isMopwashable = FindObjectOfType<MopWashBathController> ().IsMopWashAvailable (transform);
+					guic.SetBroomIcon (isMopwashable || nearestEmitterID != -1 ? true : false);
+
 					if (nearestEmitterID != -1) {
-						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 0.2f && !lockClean) {
+						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 0.8f && !lockClean) {
 							CmdClean (nearestEmitterID);
 							mopDirtLevel += 0.35f;
 							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);
@@ -212,12 +218,12 @@ public class PlayerClientController : NetworkBehaviour {
 							StartCoroutine(waiting ());
 						}
 					}
-
-					bool isMopwashable = FindObjectOfType<MopWashBathController> ().IsMopWashAvailable (transform);
-					//guic
+						
 					if (isMopwashable) {
-						if (Input.GetButtonDown ("Fire2") && !lockClean) {
+						if (Input.GetButtonDown ("Fire1") && !lockClean) {
+							CmdWashMop ();
 							mopDirtLevel -= 0.5f;
+							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);
 							guic.FillMop (mopDirtLevel);
 							animator.SetBool ("clean", true);
 							isAnimatedSpecial = false;
@@ -254,6 +260,7 @@ public class PlayerClientController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcVomit(){
 		FindObjectOfType<VomitEmittersController> ().VomitToIndex ();
+		transform.GetComponent<AudioSource> ().PlayOneShot (VomitMixSound);
 	}
 
 	[Command]
@@ -265,6 +272,18 @@ public class PlayerClientController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcClean(int id){
 		FindObjectOfType<VomitEmittersController> ().CleanEmitter (id);
+		transform.GetComponent<AudioSource> ().PlayOneShot (MopSound);
+	}
+
+	[Command]
+	public void CmdWashMop(){
+		RpcWashMop ();
+	}
+
+	[ClientRpc]
+	public void RpcWashMop(){
+		transform.GetComponent<AudioSource> ().PlayOneShot (CleanMopSound);
+		StartCoroutine (WashClip ());
 	}
 
 	[Command]
@@ -275,6 +294,7 @@ public class PlayerClientController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcDrink(int id){
 		FindObjectOfType<BeerBottlesController> ().DrinkBottle (id);
+		transform.GetComponent<AudioSource> ().PlayOneShot (DrinkSound);
 	}
 
 	[Command]
@@ -285,6 +305,12 @@ public class PlayerClientController : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcOpenDoor(int id){
 		FindObjectOfType<DoorsController> ().SwitchDoor (id);
+		transform.GetComponent<AudioSource> ().PlayOneShot (DoorOpenSound);
+	}
+
+	IEnumerator WashClip(){
+		yield return new WaitForSeconds (2f);
+		transform.GetComponent<AudioSource> ().Stop ();
 	}
 	/*
 	[Command]
