@@ -77,9 +77,9 @@ MonoBehaviour:
       useCameraFov: 1
       kernelSize: 1
   motionBlur:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      shutterAngle: 270
+      shutterAngle: 0
       sampleCount: 10
       frameBlending: 0
   eyeAdaptation:
@@ -288,18 +288,18 @@ MonoBehaviour:
   grain:
     m_Enabled: 0
     m_Settings:
-      colored: 0
-      intensity: 0.13
-      size: 0.5
-      luminanceContribution: 0.77
+      colored: 1
+      intensity: 1
+      size: 1.82
+      luminanceContribution: 0.749
   vignette:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       mode: 0
-      color: {r: 0.16016896, g: 0.2853862, b: 0.40344825, a: 1}
+      color: {r: 0.22342068, g: 0.26638618, b: 0.30689654, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.45
-      smoothness: 0.2
+      smoothness: 0.01
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
