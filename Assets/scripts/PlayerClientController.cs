@@ -21,7 +21,6 @@ public class PlayerClientController : NetworkBehaviour {
 	//movement
 	public float speed;
 	public float rotationSpeed;
-	public float bigVomitRate = 0.25f;
 	public Camera playerCamera;
 	Animator animator;
 	public Avatar Drunker;
@@ -113,6 +112,7 @@ public class PlayerClientController : NetworkBehaviour {
 			? true : false);
 
 		if (isLocalPlayer) {
+			guic.SetMap2F (transform.position.y > 3.5f ? true : false);
 			//Debug.Log (animator.GetCurrentAnimatorStateInfo (0).IsName("Drunker Jump"));
 			//Debug.Log (connectionToServer.connectionId);
 			//movement
@@ -174,7 +174,7 @@ public class PlayerClientController : NetworkBehaviour {
 				//special actions
 				if (animator.GetBool ("Drunker")) {
 					playerCamera.GetComponent<PPManager> ().SetAlcoholValue (drunkLevel);
-					if (drunkLevel >= 0.2f) {
+					if (drunkLevel > 0f) {
 						guic.SetPukeIcon (true);
 						if (Input.GetButtonDown ("Fire1") && !lockVomit) {
 							CmdVomit ();
@@ -214,9 +214,9 @@ public class PlayerClientController : NetworkBehaviour {
 					guic.SetBroomIcon (isMopwashable || nearestEmitterID != -1 ? true : false);
 
 					if (nearestEmitterID != -1) {
-						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 0.8f && !lockClean) {
+						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 1f && !lockClean) {
 							CmdClean (nearestEmitterID);
-							mopDirtLevel += 0.25f;
+							mopDirtLevel += 0.1f;
 							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);
 							guic.FillMop (mopDirtLevel);
 							animator.SetBool ("clean", true);
@@ -296,18 +296,18 @@ public class PlayerClientController : NetworkBehaviour {
 
 	[Command]
 	public void CmdVomit(){
-		if (UnityEngine.Random.value < bigVomitRate)
-			RpcVomit (true);
+		float rand = UnityEngine.Random.value;
+		if (rand < 0.25)
+			RpcVomit (3);
+		else if (rand < 0.5)
+			RpcVomit (2);
 		else
-			RpcVomit (false);
+			RpcVomit (1);
 	}
 
 	[ClientRpc]
-	public void RpcVomit(bool isBigVomit){
-		if(isBigVomit)
-			FindObjectOfType<VomitEmittersController> ().VomitToIndex (true);
-		else
-			FindObjectOfType<VomitEmittersController> ().VomitToIndex (false);
+	public void RpcVomit(int vomitCount){
+		FindObjectOfType<VomitEmittersController> ().VomitToIndex (vomitCount);
 		transform.GetComponent<AudioSource> ().PlayOneShot (VomitMixSound);
 	}
 

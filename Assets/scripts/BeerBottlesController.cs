@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BeerBottlesController : MonoBehaviour {
 
-	public int quantity = 20;
+	public int quantity = 30;
 	public bool[] availableBottle;
 
 	// Use this for initialization

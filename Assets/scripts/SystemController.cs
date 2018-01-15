@@ -83,8 +83,9 @@ public class SystemController : MonoBehaviour {
 		gsc.switchStatus (GameStatus.MainMenu);
 		if (hostOrClient)
 			nc.StopHost ();
-		else
+		else {
 			nc.StopClient ();
+		}
 	}
 
 	public void setupLobbyPlayer(GameObject lobbyPlayer, bool isServer){

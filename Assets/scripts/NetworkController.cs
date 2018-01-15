@@ -19,6 +19,14 @@ public class NetworkController : NetworkLobbyManager {
 		sdc.AddPlayer (conn.connectionId, sdc.players.Count == 0 ? 1 : 0);
 	}
 		
+	public override void OnServerDisconnect (NetworkConnection conn)
+	{
+		base.OnServerDisconnect (conn);
+		if (SceneManager.GetActiveScene ().name == playScene)
+			ServerChangeScene (lobbyScene);
+		sdc.RemovePlayer (conn.connectionId);
+	}
+
 	public override void OnClientDisconnect (NetworkConnection conn)
 	{
 		base.OnClientDisconnect (conn);
@@ -41,4 +49,15 @@ public class NetworkController : NetworkLobbyManager {
 			gsc.switchStatus (GameStatus.Lobby);
 	}
 
+	public override void OnStopHost ()
+	{
+		base.OnStopHost ();
+		sdc.players = new ServerDataController.Players ();
+	}
+
+	public override void OnStopClient ()
+	{
+		base.OnStopClient ();
+		sdc.players = new ServerDataController.Players ();
+	}
 }

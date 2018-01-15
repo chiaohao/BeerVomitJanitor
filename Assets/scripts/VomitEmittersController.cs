@@ -44,7 +44,7 @@ public class VomitEmittersController : MonoBehaviour {
 		}
 		if (cleaningEmitterID >= 0) {
 			float s = transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale;
-			float ns = s - Time.deltaTime * 0.8f;
+			float ns = s - Time.deltaTime * 1.5f;
 			transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale = ns > 0f ? ns : 0f;
 			if (ns <= 0f) {
 				transform.GetChild (cleaningEmitterID).GetComponent<ObiEmitter> ().speed = 0f;
@@ -67,19 +67,11 @@ public class VomitEmittersController : MonoBehaviour {
 			playerCam.particleRenderers [i] = transform.GetChild (i).GetComponent<ObiParticleRenderer> ();
 	}
 
-	public void VomitToIndex (bool isBigVomit) {
+	public void VomitToIndex (int vomitCount) {
 		CurrentEmitters = new List<Transform> ();
 		isVomitting = true;
-		if (isBigVomit) {
-			sdc.dirtyLevel += 0.3f;
-			for (int i = 0; i < 3; i++) {
-				int id = Array.IndexOf<bool> (availableEmitter, true);
-				availableEmitter [id] = false;
-				CurrentEmitters.Add(transform.GetChild (id));
-			}
-		} 
-		else {
-			sdc.dirtyLevel += 0.1f;
+		sdc.dirtyLevel += 0.1f * vomitCount;
+		for (int i = 0; i < vomitCount; i++) {
 			int id = Array.IndexOf<bool> (availableEmitter, true);
 			availableEmitter [id] = false;
 			CurrentEmitters.Add(transform.GetChild (id));

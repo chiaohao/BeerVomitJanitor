@@ -18,6 +18,8 @@ public class GameUIController : MonoBehaviour {
 	public Image mopFill;
 	public Image dectetorFill;
 
+	public GameObject Map2F;
+
 	public GameObject loadingPanel;
 	public GameObject winPanel;
 	public Text winText;
@@ -87,5 +89,9 @@ public class GameUIController : MonoBehaviour {
 		winText.text = i ? "Drunker Wins!" : "Cleaner Wins!";
 		returnBtn.onClick.AddListener (delegate{FindObjectOfType<GameStatusController> ().switchStatus (GameStatus.Lobby);});
 		returnBtn.onClick.AddListener (delegate{FindObjectOfType<NetworkController> ().SendReturnToLobby();});
+	}
+
+	public void SetMap2F(bool i){
+		Map2F.SetActive (i);
 	}
 }

@@ -49,6 +49,17 @@ public class ServerDataController : NetworkBehaviour {
 		players.Add (p);
 	}
 
+	public void RemovePlayer(int Nid){
+		PlayerAttribute p = new PlayerAttribute ();
+		foreach (PlayerAttribute pa in players){
+			if (pa.NetworkId == Nid) {
+				p = pa;
+				break;
+			}
+		}
+		players.Remove (p);
+	}
+
 	void Update(){
 		if (gameTime > 0f) {
 			isGameStart = true;
