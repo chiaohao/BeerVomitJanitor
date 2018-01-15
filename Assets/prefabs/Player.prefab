@@ -5487,10 +5487,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleRenderers: []
-  blurRadius: 0.02
-  thicknessCutoff: 0.874
+  blurRadius: 0.004
+  thicknessCutoff: 0.98
   colorMaterial: {fileID: 2100000, guid: d16ca3f3b0ff44edb8bc98af8c286687, type: 2}
-  fluidMaterial: {fileID: 2100000, guid: 29a7ed8ac869b4177a79933287fb9de8, type: 2}
+  fluidMaterial: {fileID: 2100000, guid: 024c93fc826896f4aacf43554964dbf1, type: 2}
 --- !u!114 &114575460342817634
 MonoBehaviour:
   m_ObjectHideFlags: 1
