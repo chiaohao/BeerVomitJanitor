@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BeerBottlesController : MonoBehaviour {
 
-	[SerializeField]
-	private int quantity = 20;
-	bool[] availableBottle;
+	public int quantity = 20;
+	public bool[] availableBottle;
 
 	// Use this for initialization
 	void Start () {
 		availableBottle = new bool[transform.childCount];
 		for (int i = 0; i < availableBottle.Length; i++)
 			availableBottle [i] = true;
+		/*
 		int disableBottle = availableBottle.Length - quantity;
 		if(disableBottle > 0) for (int i = 0; i < disableBottle; i++) {
 				int id = Random.Range (0, availableBottle.Length);
@@ -20,11 +20,17 @@ public class BeerBottlesController : MonoBehaviour {
 					DrinkBottle (id);
 				}
 		}
+		*/
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void InitBottle(int[] ids){
+		for (int i = 0; i < ids.Length; i++)
+			DrinkBottle (ids [i]);
 	}
 
 	public int GetAvailableBottle(Transform drunker) {

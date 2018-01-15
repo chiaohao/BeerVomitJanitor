@@ -40,7 +40,7 @@ public class VomitEmittersController : MonoBehaviour {
 			if (ns <= 0f) {
 				transform.GetChild (cleaningEmitterID).GetComponent<ObiEmitter> ().speed = 0f;
 				transform.GetChild (cleaningEmitterID).GetComponent<ObiEmitter> ().KillAll ();
-				transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale = 1.7f;
+				transform.GetChild (cleaningEmitterID).GetComponent<ObiParticleRenderer> ().radiusScale = 4f;
 				availableEmitter [cleaningEmitterID] = true;
 				cleaningEmitterID = -1;
 			}

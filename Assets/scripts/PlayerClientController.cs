@@ -16,6 +16,7 @@ public class PlayerClientController : NetworkBehaviour {
 	NetworkController nc;
 	ServerDataController sdc;
 	GameUIController guic;
+	BeerBottlesController bbc;
 
 	//movement
 	public float speed;
@@ -57,11 +58,11 @@ public class PlayerClientController : NetworkBehaviour {
 		sdc = FindObjectOfType<ServerDataController> ();
 		nc = FindObjectOfType<NetworkController> ();
 		guic = FindObjectOfType<GameUIController> ();
+		bbc = FindObjectOfType<BeerBottlesController> ();
 		animator = GetComponentInChildren<Animator> ();
 		Cursor.lockState = CursorLockMode.Locked;
 
 		if (isLocalPlayer) {
-			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(0).position;
 			foreach (ServerDataController.PlayerAttribute p in sdc.players) {
 				if (p.NetworkId == connectionToServer.connectionId)
 					characterId = p.CharacterId;
@@ -70,8 +71,8 @@ public class PlayerClientController : NetworkBehaviour {
 			FindObjectOfType<VomitEmittersController> ().SetVomitCameraRenderer ();
 		} 
 		else {
+			SetLayer (gameObject, 12);
 			playerCamera.gameObject.SetActive (false);
-			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos")[0].transform.GetChild(1).position;
 		}
 
 		drunkLevel = 1f;
@@ -84,6 +85,8 @@ public class PlayerClientController : NetworkBehaviour {
 		lockVomit = false;
 		lockWalk = false;
 		lockClean = false;
+
+		StartCoroutine (WaitLoading ());
 	}
 
 
@@ -188,11 +191,11 @@ public class PlayerClientController : NetworkBehaviour {
 					else {
 						guic.SetPukeIcon (false);
 					}
-					int nearestBottleID = FindObjectOfType<BeerBottlesController> ().GetAvailableBottle (transform);
+					int nearestBottleID = bbc.GetAvailableBottle (transform);
 					guic.SetDrinkIcon (nearestBottleID == -1 ? false : true);
 					if (nearestBottleID != -1) {
 						if (Input.GetButtonDown ("Fire2")) {
-							FindObjectOfType<BeerBottlesController> ().DrinkBottle (nearestBottleID);
+							bbc.DrinkBottle (nearestBottleID);
 							CmdDrink (nearestBottleID);
 							drunkLevel += 0.1f;
 							drunkLevel = Mathf.Clamp01 (drunkLevel);
@@ -202,7 +205,10 @@ public class PlayerClientController : NetworkBehaviour {
 				} else if (animator.GetBool ("Cleaner")) {
 					guic.SetPukeIcon (false);
 					int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
-					bool isMopwashable = FindObjectOfType<MopWashBathController> ().IsMopWashAvailable (transform);
+					bool isMopwashable = false;
+					MopWashBathController[] mwbcs = FindObjectsOfType<MopWashBathController> ();
+					foreach (MopWashBathController mwbc in mwbcs)
+						isMopwashable = isMopwashable || mwbc.IsMopWashAvailable (transform);
 					guic.SetBroomIcon (isMopwashable || nearestEmitterID != -1 ? true : false);
 
 					if (nearestEmitterID != -1) {
@@ -244,6 +250,38 @@ public class PlayerClientController : NetworkBehaviour {
 		lockWalk = false;
 		lockClean = false;
 		isAnimatedSpecial = true;
+	}
+
+	void SetLayer(GameObject o, int layer){
+		if (o.layer == 11)
+			o.layer = layer;
+		foreach (Transform t in o.transform)
+			SetLayer (t.gameObject, layer);
+	}
+
+	IEnumerator WaitLoading(){
+		yield return new WaitForSeconds (5);
+		guic.loadingPanel.SetActive (false);
+		if (characterId == 0)
+			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos") [0].transform.GetChild (0).position;
+		else
+			transform.position = GameObject.FindGameObjectsWithTag ("PlayerSpawnPos") [0].transform.GetChild (1).position;
+		//init bottles
+		if (isServer && isLocalPlayer) {
+			int disableBottleCount = bbc.availableBottle.Length - bbc.quantity;
+			List<int> ids = new List<int> ();
+			while (disableBottleCount != 0) {
+				int id = Random.Range (0, bbc.availableBottle.Length);
+				if (!ids.Contains (id)) {
+					ids.Add (id);
+					disableBottleCount -= 1;
+				}
+			}
+			int[] _ids = new int[ids.Count];
+			for (int i = 0; i < ids.Count; i++)
+				_ids [i] = ids [i];
+			CmdInitBottle (_ids);
+		}
 	}
 
 	IEnumerator waiting(){
@@ -293,7 +331,7 @@ public class PlayerClientController : NetworkBehaviour {
 
 	[ClientRpc]
 	public void RpcDrink(int id){
-		FindObjectOfType<BeerBottlesController> ().DrinkBottle (id);
+		bbc.DrinkBottle (id);
 		transform.GetComponent<AudioSource> ().PlayOneShot (DrinkSound);
 	}
 
@@ -312,6 +350,17 @@ public class PlayerClientController : NetworkBehaviour {
 		yield return new WaitForSeconds (2f);
 		transform.GetComponent<AudioSource> ().Stop ();
 	}
+
+	[Command]
+	public void CmdInitBottle(int[] ids){
+		RpcInitBottle (ids);
+	}
+
+	[ClientRpc]
+	public void RpcInitBottle(int[] ids){
+		bbc.InitBottle (ids);
+	}
+
 	/*
 	[Command]
 	public void CmdSpawnVomit(Vector3 position, Vector3 normal){

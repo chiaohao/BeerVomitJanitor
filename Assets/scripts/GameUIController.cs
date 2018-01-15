@@ -27,7 +27,6 @@ public class GameUIController : MonoBehaviour {
 		vomitGaugeFill.fillAmount = 0f;
 		mopFill.fillAmount = 1f;
 		dectetorFill.fillAmount = 0f;
-		StartCoroutine (WaitLoading ());
 	}
 
 	void Update () {
@@ -75,8 +74,7 @@ public class GameUIController : MonoBehaviour {
 		dectetorFill.fillAmount = Mathf.Clamp01 (i);
 	}
 
-	IEnumerator WaitLoading(){
-		yield return new WaitForSeconds (5);
+	public void CloseLoading(){
 		loadingPanel.SetActive (false);
 	}
 
