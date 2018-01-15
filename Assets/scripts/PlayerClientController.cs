@@ -21,6 +21,7 @@ public class PlayerClientController : NetworkBehaviour {
 	//movement
 	public float speed;
 	public float rotationSpeed;
+	public float bigVomitRate = 0.25f;
 	public Camera playerCamera;
 	Animator animator;
 	public Avatar Drunker;
@@ -108,8 +109,7 @@ public class PlayerClientController : NetworkBehaviour {
 		}
 
 		Mop.SetActive (animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean") ||
-			animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 0") || 
-			animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 1")
+			animator.GetCurrentAnimatorStateInfo (0).IsName ("Cleaner Clean 0") 
 			? true : false);
 
 		if (isLocalPlayer) {
@@ -173,6 +173,7 @@ public class PlayerClientController : NetworkBehaviour {
 
 				//special actions
 				if (animator.GetBool ("Drunker")) {
+					playerCamera.GetComponent<PPManager> ().SetAlcoholValue (drunkLevel);
 					if (drunkLevel >= 0.2f) {
 						guic.SetPukeIcon (true);
 						if (Input.GetButtonDown ("Fire1") && !lockVomit) {
@@ -203,6 +204,7 @@ public class PlayerClientController : NetworkBehaviour {
 						}
 					}
 				} else if (animator.GetBool ("Cleaner")) {
+					playerCamera.GetComponent<PPManager> ().SetAlcoholValue (0f);
 					guic.SetPukeIcon (false);
 					int nearestEmitterID = FindObjectOfType<VomitEmittersController> ().GetCleanableEmitter (transform);
 					bool isMopwashable = false;
@@ -214,11 +216,12 @@ public class PlayerClientController : NetworkBehaviour {
 					if (nearestEmitterID != -1) {
 						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 0.8f && !lockClean) {
 							CmdClean (nearestEmitterID);
-							mopDirtLevel += 0.35f;
+							mopDirtLevel += 0.25f;
 							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);
 							guic.FillMop (mopDirtLevel);
 							animator.SetBool ("clean", true);
 							isAnimatedSpecial = false;
+							lockClean = true;
 							lockJump = true;
 							lockWalk = true;
 							StartCoroutine(waiting ());
@@ -233,6 +236,7 @@ public class PlayerClientController : NetworkBehaviour {
 							guic.FillMop (mopDirtLevel);
 							animator.SetBool ("clean", true);
 							isAnimatedSpecial = false;
+							lockClean = true;
 							lockJump = true;
 							lockWalk = true;
 							StartCoroutine(waiting ());
@@ -281,6 +285,7 @@ public class PlayerClientController : NetworkBehaviour {
 			for (int i = 0; i < ids.Count; i++)
 				_ids [i] = ids [i];
 			CmdInitBottle (_ids);
+			sdc.gameTime = 180f;
 		}
 	}
 
@@ -291,13 +296,18 @@ public class PlayerClientController : NetworkBehaviour {
 
 	[Command]
 	public void CmdVomit(){
-		FindObjectOfType<ServerDataController> ().dirtyLevel += 0.1f;
-		RpcVomit ();
+		if (UnityEngine.Random.value < bigVomitRate)
+			RpcVomit (true);
+		else
+			RpcVomit (false);
 	}
 
 	[ClientRpc]
-	public void RpcVomit(){
-		FindObjectOfType<VomitEmittersController> ().VomitToIndex ();
+	public void RpcVomit(bool isBigVomit){
+		if(isBigVomit)
+			FindObjectOfType<VomitEmittersController> ().VomitToIndex (true);
+		else
+			FindObjectOfType<VomitEmittersController> ().VomitToIndex (false);
 		transform.GetComponent<AudioSource> ().PlayOneShot (VomitMixSound);
 	}
 

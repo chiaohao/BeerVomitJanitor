@@ -26,13 +26,16 @@ public class GameUIController : MonoBehaviour {
 	void Start () {
 		vomitGaugeFill.fillAmount = 0f;
 		mopFill.fillAmount = 1f;
-		dectetorFill.fillAmount = 0f;
 	}
 
 	void Update () {
 		sdc = FindObjectOfType<ServerDataController> ();
 		timeText.text = Mathf.Floor (sdc.gameTime / 60f).ToString ("00") + " : " + (sdc.gameTime % 60).ToString ("00");
 		FillDectetor (Mathf.Clamp01 (sdc.dirtyLevel));
+	}
+
+	void OnApplicationFocus(bool hasFocus){
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	public void InitPlayerUI(int i){
@@ -71,7 +74,7 @@ public class GameUIController : MonoBehaviour {
 	}
 
 	public void FillDectetor(float i){
-		dectetorFill.fillAmount = Mathf.Clamp01 (i);
+		dectetorFill.transform.rotation = Quaternion.Euler(0, 0, 267f - Mathf.Clamp01 (i) * 267f);
 	}
 
 	public void CloseLoading(){

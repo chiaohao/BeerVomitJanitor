@@ -1727,6 +1727,7 @@ GameObject:
   - component: {fileID: 65795612763881098}
   - component: {fileID: 114506664696422208}
   - component: {fileID: 114116143564223898}
+  - component: {fileID: 114748542215283684}
   m_Layer: 10
   m_Name: Camera
   m_TagString: MainCamera
@@ -5502,8 +5503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0224b9284e1e79b49aac1d90d943700c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.5
   rotationSpeed: 10
+  bigVomitRate: 0.3
   playerCamera: {fileID: 20857861467560204}
   Drunker: {fileID: 9000000, guid: 9cce769310c84114da68f651a869fb64, type: 3}
   Cleaner: {fileID: 9000000, guid: 7209c293914629e4fba7171cc6a88426, type: 3}
@@ -5537,6 +5539,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114748542215283684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608673421132784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d6b4bf52d82be44877eb09dc046eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Profile: {fileID: 0}
+  heavyEffect: 1
 --- !u!124 &124876983941696976
 Behaviour:
   m_ObjectHideFlags: 1
