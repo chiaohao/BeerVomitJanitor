@@ -174,7 +174,7 @@ public class PlayerClientController : NetworkBehaviour {
 				//special actions
 				if (animator.GetBool ("Drunker")) {
 					playerCamera.GetComponent<PPManager> ().SetAlcoholValue (drunkLevel);
-					if (drunkLevel > 0f) {
+					if (drunkLevel > 0.05f) {
 						guic.SetPukeIcon (true);
 						if (Input.GetButtonDown ("Fire1") && !lockVomit) {
 							CmdVomit ();
@@ -214,7 +214,7 @@ public class PlayerClientController : NetworkBehaviour {
 					guic.SetBroomIcon (isMopwashable || nearestEmitterID != -1 ? true : false);
 
 					if (nearestEmitterID != -1) {
-						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 1f && !lockClean) {
+						if (Input.GetButtonDown ("Fire1") && mopDirtLevel < 0.95f && !lockClean) {
 							CmdClean (nearestEmitterID);
 							mopDirtLevel += 0.1f;
 							mopDirtLevel = Mathf.Clamp01 (mopDirtLevel);

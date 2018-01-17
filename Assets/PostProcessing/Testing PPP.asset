@@ -281,7 +281,7 @@ MonoBehaviour:
       lut: {fileID: 0}
       contribution: 1
   chromaticAberration:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       spectralTexture: {fileID: 0}
       intensity: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
       size: 1.82
       luminanceContribution: 0.749
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       color: {r: 0.22342068, g: 0.26638618, b: 0.30689654, a: 1}

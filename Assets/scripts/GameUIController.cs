@@ -18,6 +18,7 @@ public class GameUIController : MonoBehaviour {
 	public Image mopFill;
 	public Image dectetorFill;
 
+	public GameObject Map1F;
 	public GameObject Map2F;
 
 	public GameObject loadingPanel;
@@ -92,6 +93,7 @@ public class GameUIController : MonoBehaviour {
 	}
 
 	public void SetMap2F(bool i){
+		Map1F.SetActive (!i);
 		Map2F.SetActive (i);
 	}
 }
